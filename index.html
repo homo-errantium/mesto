@@ -9,12 +9,25 @@
 </head>
 
 <body class="root">
-  <header class="header"></header>
-  <main class="main">
-    <section class="profile"></section>
-    <section class="places"></section>
+  <div class="page">
+    <header class="header">
+      <img class="header__logo" src="./images/logo_mesto.svg" alt="логотип Место.Россия">
+      <hr class="header__line">
+    </header>
+    <main class="main">
+      <section class="profile">
+        <div class="profile__data">
+          <img class="profile__image" src="./images/avatar_custo.jpg" alt="аватар Жак-Ив Кусто">
+          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <img class="profile__redact-logo" src="./images/logo_redact.svg" alt="иконка редактирования">
+          <p class="profile__subtitle">Исследователь океана</p>
+        </div>
+        <button class="profile__button"><img class="profile__add-logo" src="./images/logo_add.svg" alt="иконка добавления нового контакта"></button>
+      </section>
+      <section class="places"></section>
   </main>
   <footer class="footer"></footer>
+  </div>
 </body>
 
 </html>
