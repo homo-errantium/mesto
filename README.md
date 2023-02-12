@@ -4,7 +4,7 @@
 
 **Intro**
 
-This is a site about traveling in Russia.
+This is a site about places in Russia.
 It is dedicated to an overview of interesting places where you can visit.
 On the site you can see photos of unique places of nature and choose the most attractive ones for yourself. In addition to an overview of the places, there is a description of how you can get to them.
 To view the site, you just need to download it in archived form or through the link.
