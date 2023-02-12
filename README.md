@@ -1,17 +1,22 @@
-# Проект: Место
+# Hi, my name is Aishat.
 
-### Обзор
+## This project is a "Russian travel" website.
 
-* Figma
-* Картинки
+**Intro**
 
-**Figma**
+This is a site about traveling in Russia.
+It is dedicated to an overview of interesting places where you can visit.
+On the site you can see photos of unique places of nature and choose the most attractive ones for yourself. In addition to an overview of the places, there is a description of how you can get to them.
+To view the site, you just need to download it in archived form or through the link.
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+* [link to viewe  on Github](https://github.com/homo-errantium/russian-travel)
 
-**Картинки**
+* [link to viewe  on Github Pages](https://homo-errantium.github.io/russian-travel/)
 
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
 
-Удачи!
+
+**about technology**
+
+This is a simple and informative site with the ability to follow links. It is fully responsive and responsive for most popular devices. It uses HTML and CSS. The arrangement of elements was implemented using Grid and Flex technology, so it will not be difficult to adapt to new devices. It uses only a few fonts and colors. However, the site is tasteful, organic and friendly looking.
+
+thank you for watching.
