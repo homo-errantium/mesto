@@ -1,0 +1,8 @@
+.places {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 20px;
+    column-gap: 17px;
+    margin-bottom: 67px;
+}

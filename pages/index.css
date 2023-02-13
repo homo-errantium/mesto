@@ -13,3 +13,10 @@
 @import url(../blocks/profile/__redact-logo/profile__redact-logo.css);
 @import url(../blocks/profile/__redact-button/profile__redact-button.css);
 @import url(../blocks/profile/__subtitle/profile__subtitle.css);
+@import url(../blocks/profile/__titles-string/profile__titles-string.css);
+@import url(../blocks/profile/__add-button/profile__add-button.css);
+@import url(../blocks/places/places.css);
+@import url(../blocks/places/__item/places__item.css);
+@import url(../blocks/places/__image/places__image.css);
+@import url(../blocks/places/__subtitle/places__subtitle.css);
+@import url(../blocks/places/__text/places__text.css);

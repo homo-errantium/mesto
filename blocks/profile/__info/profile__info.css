@@ -1,3 +1,5 @@
-.profile__info{ 
-/* max-width: 336px; */
+.profile__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
