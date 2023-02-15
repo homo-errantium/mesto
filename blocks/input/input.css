@@ -1,0 +1,24 @@
+.input {
+    box-sizing: border-box;
+    font-weight: 400;
+    max-width: 358px;
+    width: 100%;
+    padding-bottom: 13px;
+
+    font-size: 14px;
+    line-height: 17px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.input::placeholder {
+    color: #000000;
+}
+
+@media screen and (max-width: 767px) {
+    .input {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+    }
+}

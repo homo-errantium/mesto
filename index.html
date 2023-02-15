@@ -91,10 +91,20 @@
     <footer class="footer">
       <h2 class="footer__title">&#169; 2020 Mesto Russia</h2>
     </footer>
-    <!-- <div class="popup">
+    <div class="popup">
       <div class="popup__overlay"></div>
-      <div class="popup__container"></div>
-    </div> -->
+      <div class="popup__container">
+        <a href="#" class="popup__close"><img src="./images/icon_close.svg" alt="иконка закрытия окна"
+            class="popup__close-image"></a>
+        <p class="popup__title">Редактировать профиль</p>
+        <form action="mailto:lunatik89@mail.ru" enctype="text/plain" class="popup__form">
+          <input placeholder="Жак-Ив Кусто" type="text" class="input popup__username">
+          <textarea class="input popup__userinfo" placeholder="Исследователь океана" name="" id="" cols="30"
+            rows="1"></textarea>
+          <button class="popup__button"><span class="popup__button-text">Сохранить</span></button>
+        </form>
+      </div>
+    </div>
   </div>
 </body>
 
