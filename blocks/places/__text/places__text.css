@@ -1,6 +1,7 @@
 .places__text {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 31px;
     padding: 0 21px;
 }

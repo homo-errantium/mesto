@@ -6,3 +6,15 @@
     column-gap: 17px;
     margin-bottom: 67px;
 }
+
+@media screen and (max-width: 879px) {
+    .places {
+        justify-content: space-around;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .places {
+        margin-bottom: 48px;
+    }
+}

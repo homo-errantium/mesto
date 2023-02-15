@@ -6,4 +6,20 @@
     background-color: rgba(28, 28, 28, 0);
     margin: 0;
     margin-bottom: 7px;
+    cursor: pointer;
+    position: relative;
+}
+
+@media screen and (max-width: 767px) {
+    .profile__redact-button {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media screen and (max-width: 319px) {
+    .profile__redact-button {
+        width: 18px;
+        height: 18px;
+    }
 }
