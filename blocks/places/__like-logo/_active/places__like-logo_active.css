@@ -1,0 +1,9 @@
+.places__like-logo_active{
+  width: 22px;
+  height: 19px;
+  cursor: pointer;
+}
+
+.places__like-logo_active:hover{
+  opacity: 1;
+}

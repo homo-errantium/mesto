@@ -1,6 +1,7 @@
 .popup__userinfo {
     resize: none;
     margin-bottom: 48px;
+
 }
 
 @media screen and (max-width: 767px) {

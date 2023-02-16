@@ -1,4 +1,4 @@
-.popup__button {
+.popup__save-button {
     box-sizing: border-box;
     padding: 0;
     max-width: 358px;
@@ -9,8 +9,9 @@
     color: #ffffff;
     text-align: center;
     cursor: pointer;
+    border: none;
 }
 
-.popup__button:hover {
+.popup__save-button:hover {
     opacity: 0.8;
 }

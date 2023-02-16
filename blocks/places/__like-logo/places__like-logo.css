@@ -1,7 +1,6 @@
 .places__like-logo {
     width: 22px;
     height: 19px;
-    background-color: rgba(28, 28, 28, 0);
     cursor: pointer;
 }
 
@@ -9,8 +8,3 @@
     opacity: 0.5;
 }
 
-@media screen and (max-width: 767px) {
-    .places__like-logo {
-        width: 60%;
-    }
-}
