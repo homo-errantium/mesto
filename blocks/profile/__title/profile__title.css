@@ -1,11 +1,14 @@
 .profile__title {
     display: inline-block;
     margin: 0;
+    max-width: 500px;
     font-size: 42px;
     font-weight: 500;
     line-height: 48px;
     margin-right: 25px;
     white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
 }
 
 @media screen and (max-width: 767px) {

@@ -1,22 +1,21 @@
 # Hi, my name is Aishat.
 
-## This project is a "Russian travel" website.
+## This project is a "Mesto" website.
 
 **Intro**
 
-This is a site about places in Russia.
+This site is dedicated to the most beautiful places in Russia and beyond.
 It is dedicated to an overview of interesting places where you can visit.
-On the site you can see photos of unique places of nature and choose the most attractive ones for yourself. In addition to an overview of the places, there is a description of how you can get to them.
-To view the site, you just need to download it in archived form or through the link.
+On the site you can see photos of the unique places of Russian nature and choose the most attractive ones for yourself. While this site does not have a detailed description, this is just a prototype for a multi-page full-fledged guide site.
 
-* [link to viewe  on Github](https://github.com/homo-errantium/russian-travel)
+* [link to viewe  on Github](https://github.com/homo-errantium/mesto)
 
-* [link to viewe  on Github Pages](https://homo-errantium.github.io/russian-travel/)
+* [link to viewe  on Github Pages](https://homo-errantium.github.io/mesto/)
 
 
 
 **about technology**
 
-This is a simple and informative site with the ability to follow links. It is fully responsive and responsive for most popular devices. It uses HTML and CSS. The arrangement of elements was implemented using Grid and Flex technology, so it will not be difficult to adapt to new devices. It uses only a few fonts and colors. However, the site is tasteful, organic and friendly looking.
+This is a simple and informative site. It is fully responsive and responsive for most popular devices. It uses HTML and CSS, as well as JavaScript. The arrangement of elements was implemented using Flex technology, so it will not be difficult to adapt to new devices. It uses only a few fonts and colors. However, the site is tasteful, organic and friendly looking.
 
 thank you for watching.
