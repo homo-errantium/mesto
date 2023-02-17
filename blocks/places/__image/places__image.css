@@ -1,6 +1,5 @@
 .places__image {
-    position: relative;
-    width: 100%;
+    width: 282px;
     height: 282px;
     object-fit: cover;
     margin-bottom: 25px;
