@@ -7,7 +7,7 @@
     line-height: 48px;
     margin-right: 25px;
     white-space: nowrap;
-    overflow: hidden; 
+    overflow: hidden;
     text-overflow: ellipsis;
 }
 
