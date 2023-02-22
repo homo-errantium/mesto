@@ -13,30 +13,25 @@
   <div class="page">
     <header class="header">
       <img class="header__logo" src="./images/logo_mesto.svg" alt="логотип Место.Россия">
-      <hr class="header__line">
     </header>
     <main class="main">
       <section class="profile">
-        <div class="profile__data">
-          <img class="profile__image" src="./images/avatar_custo.jpg" alt="аватар Жак-Ив Кусто">
-          <div class="profile__info">
-            <div class="profile__titles-string">
-              <h1 class="profile__title">Жак-Ив Кусто</h1>
-              <button class="profile__redact-button"><img class="profile__redact-logo" src="./images/logo_redact.svg"
-                  alt="иконка редактирования профиля"></button>
-            </div>
-            <p class="profile__subtitle">Исследователь океана</p>
-          </div>
+        <img class="profile__image" src="./images/avatar_custo.jpg" alt="аватар Жак-Ив Кусто">
+        <div class="profile__info">
+          <div class="profile__titles-string">
+            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <button type="button" class="profile__redact-button"></button>
+          </div>`
+          <p class="profile__subtitle">Исследователь океана</p>
         </div>
-        <button class="profile__add-button"><img class="profile__add-logo" src="./images/logo_add.svg"
-            alt="иконка добавления нового контакта"></button>
+        <button type="button" class="profile__add-button"></button>
       </section>
       <section class="places">
         <div class="places__item">
           <img src="./images/places/karachaevsk.jpg" alt="храм на горе" class="places__image">
           <div class="places__text">
-            <p class="places__subtitle">Карачаевск</p>
-            <button class="places__button">
+            <h2 class="places__subtitle">Карачаевск</h2>
+            <button type="button" class="places__button">
               <img src="./images/logo-like.svg" alt="иконка 'понравилось'" class="places__like-logo">
             </button>
           </div>
@@ -44,8 +39,8 @@
         <div class="places__item">
           <img src="./images/places/elbrus.jpg" alt="гора Эльбрус" class="places__image">
           <div class="places__text">
-            <p class="places__subtitle">Гора Эльбрус</p>
-            <button class="places__button">
+            <h2 class="places__subtitle">Гора Эльбрус</h2>
+            <button type="button" class="places__button">
               <img src="./images/logo-like.svg" alt="иконка 'понравилось'" class="places__like-logo">
             </button>
           </div>
@@ -53,7 +48,7 @@
         <div class="places__item">
           <img src="./images/places/dombai.jpg" alt="храм на горе" class="places__image">
           <div class="places__text">
-            <p class="places__subtitle">Домбай</p>
+            <h2 class="places__subtitle">Домбай</h2>
             <button class="places__button">
               <img src="./images/logo-like.svg" alt="иконка 'понравилось'" class="places__like-logo">
             </button>
@@ -62,8 +57,8 @@
         <div class="places__item">
           <img src="./images/places/mountain.jpg" alt="гора Эльбрус" class="places__image">
           <div class="places__text">
-            <p class="places__subtitle">Гора Эльбрус</p>
-            <button class="places__button">
+            <h2 class="places__subtitle">Гора Эльбрус</h2>
+            <button type="button" class="places__button">
               <img src="./images/logo-like.svg" alt="иконка 'понравилось'" class="places__like-logo">
             </button>
           </div>
@@ -71,8 +66,8 @@
         <div class="places__item">
           <img src="./images/places/river.jpg" alt="горный ручей" class="places__image">
           <div class="places__text">
-            <p class="places__subtitle">Домбай</p>
-            <button class="places__button">
+            <h2 class="places__subtitle">Домбай</h2>
+            <button type="button" class="places__button">
               <img src="./images/logo-like.svg" alt="иконка 'понравилось'" class="places__like-logo">
             </button>
           </div>
@@ -80,8 +75,8 @@
         <div class="places__item">
           <img src="./images/places/cow.jpg" alt="горное пастбище" class="places__image">
           <div class="places__text">
-            <p class="places__subtitle">Карачаевo-Черкессия</p>
-            <button class="places__button">
+            <h2 class="places__subtitle">Карачаевo-Черкессия</h2>
+            <button type="button" class="places__button">
               <img src="./images/logo-like.svg" alt="иконка 'понравилось'" class="places__like-logo">
             </button>
           </div>
@@ -89,23 +84,21 @@
       </section>
     </main>
     <footer class="footer">
-      <h2 class="footer__title">&#169; 2020 Mesto Russia</h2>
+      <p class="footer__title">&#169; 2020 Mesto Russia</p>
     </footer>
     <div class="popup">
-      <div class="popup__overlay"></div>
       <div class="popup__container">
-        <a href="#" class="popup__close"><img src="./images/icon_close.svg" alt="иконка закрытия окна"
-            class="popup__close-image"></a>
-        <p class="popup__title">Редактировать профиль</p>
+        <button type="button" class="popup__close"></button>
+        <h3 class="popup__title">Редактировать профиль</h3>
         <form enctype="text/plain" class="popup__form">
           <input placeholder="Имя" type="text" class="input popup__username">
-          <input  placeholder="О себе" type="text" class="input popup__userinfo">
-          <button class="popup__save-button"><span class="popup__button-text">Сохранить</span></button>
+          <input placeholder="О себе" type="text" class="input popup__userinfo">
+          <button class="popup__save-button">Сохранить</button>
         </form>
       </div>
     </div>
   </div>
-  <script src="./index.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 
 </html>
