@@ -2,8 +2,9 @@
     width: 32px;
     height: 32px;
     position: absolute;
-    top: -40px;
-    right: -40px;
+    right: 50%;
+    top: 50%;
+    transform: translate(255px, -205px);
     text-decoration: none;
     cursor: pointer;
     background: url(../../../images/icon_close.svg) no-repeat;
@@ -21,7 +22,6 @@
     .popup__close {
         width: 20px;
         height: 20px;
-        top: -36px;
-        right: 0px;
+        transform: translate(141px, -197px);
     }
 }

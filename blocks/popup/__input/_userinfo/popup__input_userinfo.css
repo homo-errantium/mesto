@@ -1,11 +1,10 @@
-.popup__userinfo {
+.popup__input_userinfo {
     resize: none;
     margin-bottom: 48px;
-
 }
 
 @media screen and (max-width: 767px) {
-    .popup__userinfo {
+    .popup__input_userinfo {
         margin-bottom: 45px;
     }
 }

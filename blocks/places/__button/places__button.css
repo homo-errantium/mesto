@@ -1,7 +1,18 @@
 .places__button {
+    box-sizing: border-box;
     border: none;
     margin: 0;
+    margin-bottom: 5px;
     padding: 0;
     background-color: rgba(28, 28, 28, 0);
+    background: url(../../../images/logo-like.svg) no-repeat;
+    background-size: auto;
+    background-position: center center;
+    width: 22px;
+    height: 19px;
+    cursor: pointer;
+    object-fit: cover;
 }
-
+.places__button:hover {
+    opacity: 0.5;
+}

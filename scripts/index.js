@@ -43,4 +43,4 @@ formPopup.addEventListener("submit", handleFormSubmit);
 //     }
 // }
 
-likeLogo.addEventListener("click", activeLikeButton);
+// likeLogo.addEventListener("click", activeLikeButton);
