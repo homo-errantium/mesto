@@ -1,0 +1,25 @@
+.places__delete-button {
+    width: 18px;
+    height: 19px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    /* transform: translate(255px, -205px); */
+    text-decoration: none;
+    cursor: pointer;
+    background: url(../../../images/icon_delete.svg) no-repeat;
+    background-size: contain;
+    background-color: rgba(28, 28, 28, 0);
+    border: none;
+    padding: 0;
+}
+
+.places__delete-button:hover {
+    opacity: 0.6;
+}
+
+/* @media screen and (max-width: 767px) {
+    .popup__close {
+        width: 20px;
+        height: 20px;
+        transform: translate(141px, -197px); */
