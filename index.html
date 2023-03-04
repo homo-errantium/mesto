@@ -27,66 +27,12 @@
         <button type="button" class="profile__add-button"></button>
       </section>
       <section class="places">
-        <!-- <div class="places__item">
-          <button type="button" class="places__delete-button"></button>
-          <img src="./images/places/karachaevsk.jpg" alt="храм на горе" class="places__image">
-          <div class="places__text">
-            <h2 class="places__subtitle">Карачаевск</h2>
-            <button type="button" class="places__button">
-            </button>
-          </div>
-        </div>
-        <div class="places__item">
-          <button type="button" class="places__delete-button"></button>
-          <img src="./images/places/elbrus.jpg" alt="гора Эльбрус" class="places__image">
-          <div class="places__text">
-            <h2 class="places__subtitle">Гора Эльбрус</h2>
-            <button type="button" class="places__button">
-            </button>
-          </div>
-        </div>
-        <div class="places__item">
-          <button type="button" class="places__delete-button"></button>
-          <img src="./images/places/dombai.jpg" alt="храм на горе" class="places__image">
-          <div class="places__text">
-            <h2 class="places__subtitle">Домбай</h2>
-            <button class="places__button">
-            </button>
-          </div>
-        </div>
-        <div class="places__item">
-          <button type="button" class="places__delete-button"></button>
-          <img src="./images/places/mountain.jpg" alt="гора Эльбрус" class="places__image">
-          <div class="places__text">
-            <h2 class="places__subtitle">Гора Эльбрус</h2>
-            <button type="button" class="places__button">
-            </button>
-          </div>
-        </div>
-        <div class="places__item">
-          <button type="button" class="places__delete-button"></button>
-          <img src="./images/places/river.jpg" alt="горный ручей" class="places__image">
-          <div class="places__text">
-            <h2 class="places__subtitle">Домбай</h2>
-            <button type="button" class="places__button">
-            </button>
-          </div>
-        </div>
-        <div class="places__item">
-          <button type="button" class="places__delete-button"></button>
-          <img src="./images/places/cow.jpg" alt="горное пастбище" class="places__image">
-          <div class="places__text">
-            <h2 class="places__subtitle">Карачаевo-Черкессия</h2>
-            <button type="button" class="places__button">
-            </button>
-          </div>
-        </div> -->
       </section>
     </main>
     <footer class="footer">
       <p class="footer__title">&#169; 2020 Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <div class="popup popup_type-edit">
       <div class="popup__container">
         <button type="button" class="popup__close"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
@@ -94,6 +40,17 @@
           <input placeholder="Имя" type="text" class="popup__input popup__input_type_username">
           <input placeholder="О себе" type="text" class="popup__input popup__input_type_userinfo">
           <button class="popup__save-button">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_type-add">
+      <div class="popup__container">
+        <button type="button" class="popup__close"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form enctype="text/plain" class="popup__form">
+          <input placeholder="Название" type="text" class="popup__input popup__input_type_username">
+          <input placeholder="Ссылка на картинку" type="text" class="popup__input popup__input_type_userinfo">
+          <button class="popup__save-button">Создать</button>
         </form>
       </div>
     </div>
