@@ -45,19 +45,31 @@ const initialCards = [
     },
 ];
 
-/*---------------создание карточки--------------*/
-const creatCard = (card) => {
+/*---------------создание карточек из массива--------------*/
+const creatArrayCard = (card) => {
+    const arrayCard = document
+        .querySelector("#placesCardTemplate")
+        .content.cloneNode(true);
+    const arrayCardImage = arrayCard.querySelector(".places__image");
+    arrayCardImage.setAttribute("src", card.link);
+    const arrayCardHeading = arrayCard.querySelector(".places__subtitle");
+    arrayCardHeading.textContent = card.name;
+    places.append(arrayCard);
+};
+
+initialCards.forEach(creatArrayCard);
+
+/*---------------создание новой карточки--------------*/
+const creatNewCard = () => {
     const newCard = document
         .querySelector("#placesCardTemplate")
         .content.cloneNode(true);
     const newCardImage = newCard.querySelector(".places__image");
-    newCardImage.setAttribute("src", card.link);
+    newCardImage.setAttribute("src", linkInputAdd.value); //как-то вставить
     const newCardHeading = newCard.querySelector(".places__subtitle");
-    newCardHeading.textContent = card.name;
-    places.append(newCard);
+    newCardHeading.textContent = nameInputAdd.value; //как-то вставить
+    places.prepend(newCard);
 };
-
-initialCards.forEach(creatCard);
 
 /*-------------открытие/закрытие попап-а------------------*/
 function closeAddPopup() {
@@ -66,8 +78,6 @@ function closeAddPopup() {
 
 function openAddPopup() {
     popupAdd.classList.add("popup_opened");
-    // nameInput.value = usernameProfile.textContent;
-    // jobInput.value = userninfoProfile.textContent;
 }
 
 function closeEditPopup() {
@@ -86,25 +96,31 @@ redactButton.addEventListener("click", openEditPopup);
 closeButtonEdit.addEventListener("click", closeEditPopup);
 
 /*------------------------------добавление данных-------------------*/
-function handleFormSubmit(evt) {
+function handleFormSubmitEdit(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     usernameProfileEdit.textContent = nameInputEdit.value;
     userninfoProfileEdit.textContent = jobInputEdit.value;
     closeEditPopup();
 }
 
+function handleFormSubmitAdd(evt) {
+    evt.preventDefault();
+    creatNewCard();
+    closeAddPopup();
+}
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
-formPopupEdit.addEventListener("submit", handleFormSubmit);
+formPopupEdit.addEventListener("submit", handleFormSubmitEdit);
+formPopupAdd.addEventListener("submit", handleFormSubmitAdd);
 
 /*--------------------------лайки-------------------------------*/
-function activeLikeButton() {
-    likeLogo.classList.toggle("places__like-logo_active");
-    if (likeLogo.classList.contains("places__like-logo_active") === true) {
-        likeLogo.setAttribute("src", "./images/logo-like-active.svg");
-    } else {
-        likeLogo.setAttribute("src", "./images/logo-like.svg");
-    }
-}
+// function activeLikeButton() {
+//     likeLogo.classList.toggle("places__like-logo_active");
+//     if (likeLogo.classList.contains("places__like-logo_active") === true) {
+//         likeLogo.setAttribute("src", "./images/logo-like-active.svg");
+//     } else {
+//         likeLogo.setAttribute("src", "./images/logo-like.svg");
+//     }
+// }
 
-likeLogo.addEventListener("click", activeLikeButton);
+// likeLogo.addEventListener("click", activeLikeButton);
