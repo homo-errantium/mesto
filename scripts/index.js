@@ -16,7 +16,6 @@ const jobInputEdit = popupEdit.querySelector(".popup__input_type_userinfo");
 const linkInputAdd = popupAdd.querySelector(".popup__input_type_userinfo");
 const usernameProfileEdit = profile.querySelector(".profile__title");
 const userninfoProfileEdit = profile.querySelector(".profile__subtitle");
-const likeLogo = document.querySelector(".places__like-logo");
 
 const initialCards = [
     {
@@ -45,8 +44,8 @@ const initialCards = [
     },
 ];
 
-/*---------------создание карточек из массива--------------*/
-const creatArrayCard = (card) => {
+/*---------------ф-я создание карточек из массива--------------*/
+function creatArrayCard(card) {
     const arrayCard = document
         .querySelector("#placesCardTemplate")
         .content.cloneNode(true);
@@ -54,26 +53,69 @@ const creatArrayCard = (card) => {
     arrayCardImage.setAttribute("src", card.link);
     const arrayCardHeading = arrayCard.querySelector(".places__subtitle");
     arrayCardHeading.textContent = card.name;
-    places.append(arrayCard);
-};
+    const likeButton = arrayCard.querySelector(".places__like-logo");
+    likeButton.addEventListener("click", handleLikeButton);
+    const deleteButton = arrayCard.querySelector(".places__delete-button");
+    deleteButton.addEventListener("click", handleDeleteButton);
+    return arrayCard;
+}
+/*-----ф-я удаления карточки------*/
+function handleDeleteButton(event) {
+    const deleteCardButton = event.target;
+    const deleteCard = deleteCardButton.closest(".places__item");
+    deleteCard.remove();
+}
 
-initialCards.forEach(creatArrayCard);
+/*----ф-я лайк-----*/
+function handleLikeButton(event) {
+    const likeCardButton = event.target;
+    likeCardButton.classList.toggle("places__like-logo_active");
+    if (
+        likeCardButton.classList.contains("places__like-logo_active") === true
+    ) {
+        likeCardButton.style.backgroundImage =
+            "url(../../../images/logo-like-active.svg)";
+    } else {
+        likeCardButton.style.backgroundImage =
+            "url(../../../images/logo-like.svg)";
+    }
+}
+
+/*-----ф-я добавления созданных из массива карточек-------*/
+function addArrayCard(card) {
+    const arrayNewCard = creatArrayCard(card);
+    places.append(arrayNewCard);
+}
+
+initialCards.forEach(addArrayCard);
 
 /*---------------создание новой карточки--------------*/
-const creatNewCard = () => {
-    const newCard = document
+function creatNewCards(popupAdd) {
+    const creatNewCard = document
         .querySelector("#placesCardTemplate")
         .content.cloneNode(true);
-    const newCardImage = newCard.querySelector(".places__image");
-    newCardImage.setAttribute("src", linkInputAdd.value); //как-то вставить
-    const newCardHeading = newCard.querySelector(".places__subtitle");
-    newCardHeading.textContent = nameInputAdd.value; //как-то вставить
+    const creatNewCardImage = creatNewCard.querySelector(".places__image");
+    creatNewCardImage.setAttribute("src", linkInputAdd.value); //как-то вставить
+    const creatNewCardHeading = creatNewCard.querySelector(".places__subtitle");
+    creatNewCardHeading.textContent = nameInputAdd.value; //как-то вставить
+    const likeButton = creatNewCard.querySelector(".places__like-logo");
+    likeButton.addEventListener("click", handleLikeButton);
+    const deleteButton = creatNewCard.querySelector(".places__delete-button");
+    deleteButton.addEventListener("click", handleDeleteButton);
+    return creatNewCard;
+}
+
+/*---------------ф-я добавления карточек--------------*/
+function addNewCard(nameInputAdd, linkInputAdd) {
+    const newCard = creatNewCards(nameInputAdd, linkInputAdd);
     places.prepend(newCard);
-};
+}
 
 /*-------------открытие/закрытие попап-а------------------*/
 function closeAddPopup() {
     popupAdd.classList.remove("popup_opened");
+    nameInputAdd.value = "";
+    linkInputAdd.value = "";
 }
 
 function openAddPopup() {
@@ -86,8 +128,8 @@ function closeEditPopup() {
 
 function openEditPopup() {
     popupEdit.classList.add("popup_opened");
-    nameInputEdit.value = usernameProfileEdit.textContent;
-    jobInputEdit.value = userninfoProfileEdit.textContent;
+    nameInputEdit.value = usernameProfileEdit.textContent; //добавления в ред.окно прежнего имени
+    jobInputEdit.value = userninfoProfileEdit.textContent; //добавления в ред.окно прежнего статуса
 }
 
 addButton.addEventListener("click", openAddPopup);
@@ -95,7 +137,7 @@ closeButtonAdd.addEventListener("click", closeAddPopup);
 redactButton.addEventListener("click", openEditPopup);
 closeButtonEdit.addEventListener("click", closeEditPopup);
 
-/*------------------------------добавление данных-------------------*/
+/*------------------------------применение обновленных данных-------------------*/
 function handleFormSubmitEdit(evt) {
     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
     usernameProfileEdit.textContent = nameInputEdit.value;
@@ -105,21 +147,24 @@ function handleFormSubmitEdit(evt) {
 
 function handleFormSubmitAdd(evt) {
     evt.preventDefault();
-    creatNewCard();
+    addNewCard();
     closeAddPopup();
 }
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
+
 formPopupEdit.addEventListener("submit", handleFormSubmitEdit);
 formPopupAdd.addEventListener("submit", handleFormSubmitAdd);
 
 /*--------------------------лайки-------------------------------*/
+
+// const likeLogo = document.querySelector(".places__like-logo");
 // function activeLikeButton() {
 //     likeLogo.classList.toggle("places__like-logo_active");
 //     if (likeLogo.classList.contains("places__like-logo_active") === true) {
-//         likeLogo.setAttribute("src", "./images/logo-like-active.svg");
+//         likeLogo.style.backgroundImage = "./images/logo-like-active.svg";
+//         console.log("addddddded");
 //     } else {
-//         likeLogo.setAttribute("src", "./images/logo-like.svg");
+//         likeLogo.style.backgroundImage = "./images/logo-like.svg";
+//         console.log("NOOOOOOOOOO");
 //     }
 // }
 
