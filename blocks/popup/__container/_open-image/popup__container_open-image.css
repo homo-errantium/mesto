@@ -1,0 +1,9 @@
+.popup__container_open-image {
+    max-width: fit-content;
+    box-sizing: content-box;
+    margin: 0 auto;
+
+    color: #ffffff;
+    background-color: unset;
+    max-height: 80%;
+}
