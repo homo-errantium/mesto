@@ -2,13 +2,12 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    box-sizing: border-box;
+    align-items: left;
     max-width: fit-content;
     padding: 0;
-    max-height: 100vh;
+    height: auto;
     background-color: unset;
     color: #ffffff;
-    overflow: hidden;
+
     border-radius: 0;
 }
