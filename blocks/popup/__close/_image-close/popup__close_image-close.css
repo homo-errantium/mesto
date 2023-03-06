@@ -1,5 +1,5 @@
 .popup__close_image-close {
-    top: 6%;
-    right: 6%;
-    transform: none;
+    top: 50%;
+    right: 50%;
+    transform: translate(415px, -305px);
 }

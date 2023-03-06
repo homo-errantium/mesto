@@ -1,9 +1,13 @@
 .popup__container_open-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
     max-width: fit-content;
-    box-sizing: content-box;
-    margin: 0 auto;
-
-    color: #ffffff;
+    padding: 90px 0;
+    max-height: fit-content;
     background-color: unset;
-    max-height: 80%;
+    color: #ffffff;
+    overflow: hidden;
 }
