@@ -48,6 +48,7 @@ const initialCards = [
     },
 ];
 
+
 /*---------------ф-я создание карточек из массива--------------*/
 function creatArrayCard(card) {
     const arrayCard = document
@@ -55,6 +56,7 @@ function creatArrayCard(card) {
         .content.cloneNode(true);
     const arrayCardImage = arrayCard.querySelector(".places__image");
     arrayCardImage.setAttribute("src", card.link);
+    arrayCardImage.setAttribute("alt", `фото: ${card.name}`);
     const arrayCardHeading = arrayCard.querySelector(".places__subtitle");
     arrayCardHeading.textContent = card.name;
     const likeButton = arrayCard.querySelector(".places__like-logo");
@@ -101,6 +103,7 @@ function creatNewCards(popupAdd) {
         .content.cloneNode(true);
     const creatNewCardImage = creatNewCard.querySelector(".places__image");
     creatNewCardImage.setAttribute("src", linkInputAdd.value);
+    creatNewCardImage.setAttribute("alt", `фото: ${nameInputAdd.value}`);
     const creatNewCardHeading = creatNewCard.querySelector(".places__subtitle");
     creatNewCardHeading.textContent = nameInputAdd.value;
     const likeButton = creatNewCard.querySelector(".places__like-logo");

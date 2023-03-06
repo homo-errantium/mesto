@@ -1,11 +1,11 @@
 .popup__close {
-    width: 32px;
-    height: 32px;
     position: absolute;
     right: 50%;
     top: 50%;
     transform: translate(255px, -205px);
     text-decoration: none;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
     background: url(../../../images/icon_close.svg) no-repeat;
     background-size: contain;

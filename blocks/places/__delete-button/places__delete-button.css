@@ -4,7 +4,7 @@
     position: absolute;
     right: 20px;
     top: 20px;
-    /* transform: translate(255px, -205px); */
+    z-index: 1;
     text-decoration: none;
     cursor: pointer;
     background: url(../../../images/icon_delete.svg) no-repeat;
@@ -17,9 +17,3 @@
 .places__delete-button:hover {
     opacity: 0.6;
 }
-
-/* @media screen and (max-width: 767px) {
-    .popup__close {
-        width: 20px;
-        height: 20px;
-        transform: translate(141px, -197px); */

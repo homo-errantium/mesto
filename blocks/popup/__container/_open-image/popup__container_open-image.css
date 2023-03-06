@@ -5,9 +5,10 @@
     align-items: flex-start;
     box-sizing: border-box;
     max-width: fit-content;
-    padding: 90px 0;
-    max-height: fit-content;
+    padding: 0;
+    max-height: 100vh;
     background-color: unset;
     color: #ffffff;
     overflow: hidden;
+    border-radius: 0;
 }
