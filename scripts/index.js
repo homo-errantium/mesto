@@ -28,7 +28,7 @@ const initialCards = [
     },
     {
         name: "Челябинская область",
-        link: "`https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg`",
+        link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
     },
     {
         name: "Иваново",
