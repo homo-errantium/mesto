@@ -5,8 +5,8 @@
 **Intro**
 
 This site is dedicated to the most beautiful places in Russia and beyond.
-It is dedicated to an overview of interesting places where you can visit.
-On the site you can see photos of the unique places of Russian nature and choose the most attractive ones for yourself. While this site does not have a detailed description, this is just a prototype for a multi-page full-fledged guide site.
+It is interactive, convenient and even useful: you can not only choose places to travel, but add your own so that other people can learn more about them and visit them.
+On this site you can add interesting places, photos and short descriptions.
 
 * [link to viewe  on Github](https://github.com/homo-errantium/mesto)
 
