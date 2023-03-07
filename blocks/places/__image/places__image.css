@@ -1,6 +1,7 @@
 .places__image {
     width: 282px;
     height: 282px;
+    background-color: black;
     object-fit: cover;
     cursor: pointer;
 }
