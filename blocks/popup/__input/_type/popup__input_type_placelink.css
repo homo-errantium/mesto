@@ -1,0 +1,10 @@
+.popup__input_type_placelink {
+    resize: none;
+    margin-bottom: 48px;
+}
+
+@media screen and (max-width: 767px) {
+    .popup__input_type_placelink {
+        margin-bottom: 45px;
+    }
+}
