@@ -123,5 +123,6 @@ function handleFormSubmitAdd(evt) {
     closePopup(popupAdd);
 }
 
+/*-----обр-к создания/редактирования карточки----*/
 formPopupEdit.addEventListener("submit", handleFormSubmitEdit);
 formPopupAdd.addEventListener("submit", handleFormSubmitAdd);
