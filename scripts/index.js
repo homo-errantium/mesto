@@ -72,8 +72,6 @@ function handleCardOpen(event) {
 }
 
 function openPopup(popup) {
-    keepOldInfo(); // для попапа редак-я (сохр прежних данных)
-    resetUnsaveInfo(); //для сброса попапа добавления
     popup.classList.add("popup_opened");
 }
 
@@ -81,13 +79,13 @@ function closePopup(popup) {
     popup.classList.remove("popup_opened");
 }
 
-function keepOldInfo() {
+function fillPopupProfileImage() {
     nameInputEdit.value = userNameProfileEdit.textContent; //добавления в ред.окно прежнего имени
     jobInputEdit.value = userInfoProfileEdit.textContent; //добавления в ред.окно прежнего статуса
 }
 
-function resetUnsaveInfo() {
-    document.getElementById("popupAddForm").reset();
+function resetPopupAddImage() {
+    formPopupAdd.reset();
 }
 
 /*------кнопки------*/
@@ -96,6 +94,7 @@ closeButtonOpen.addEventListener("click", () => {
 });
 
 addButton.addEventListener("click", () => {
+    resetPopupAddImage();
     openPopup(popupAdd);
 });
 closeButtonAdd.addEventListener("click", () => {
@@ -106,6 +105,7 @@ closeButtonEdit.addEventListener("click", () => {
 });
 
 redactButton.addEventListener("click", () => {
+    fillPopupProfileImage(); // для попапа редак-я (сохр прежних данных)
     openPopup(popupEdit);
 });
 
