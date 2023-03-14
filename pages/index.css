@@ -38,3 +38,4 @@
 @import url(../blocks/popup/__container/_open-image/popup__container_open-image.css);
 @import url(../blocks/popup/__open-image-title/popup__open-image-title.css);
 @import url(../blocks/popup/_type_open-image/popup_type_open-image.css);
+@import url(../blocks/popup/__input/_type/popup__input_type_error.css);
