@@ -127,27 +127,78 @@ function handleFormSubmitAdd(evt) {
 formPopupEdit.addEventListener("submit", handleFormSubmitEdit);
 formPopupAdd.addEventListener("submit", handleFormSubmitAdd);
 
-/*---------------------------*/
-// Функция, которая добавляет класс с ошибкой
-const showInputError = (element) => {
-    element.classList.add("form__input_type_error");
+const showInputError = (formElement, inputElement, errorMessage) => {
+    const errorElement = formElement.querySelector(`.${inputElement.id}-error`); //находим нужный спан
+    inputElement.classList.add("popup__input_type_error"); //стилизуем нужный инпут при ошибке
+    errorElement.textContent = errorMessage; // помещаем в спан стандартный текст ошибки
+    errorElement.classList.add("popup__input-error_active"); //стилизуем спан?
 };
 
-// Функция, которая удаляет класс с ошибкой
-const hideInputError = (element) => {
-    element.classList.remove("form__input_type_error");
+const hideInputError = (formElement, inputElement) => {
+    const errorElement = formElement.querySelector(`.${inputElement.id}-error`); //находим нужный спан
+    inputElement.classList.remove("popup__input_type_error"); // удаляем класс ошибки
+    errorElement.classList.remove("popup__input-error_active"); //удаляем видимость спана ошибки
+    errorElement.textContent = ""; //очищаем спан
 };
 
-// Функция, которая проверяет валидность поля
-const isValid = () => {
-    if (!formInput.validity.valid) {
-        // Если поле не проходит валидацию, покажем ошибку
-        showInputError(formInput);
+const checkInputValidity = (formElement, inputElement) => {
+    if (!inputElement.validity.valid) {
+        //если содержимое невалидно
+        showInputError(
+            //пказываем ошибку
+            formElement,
+            inputElement,
+            inputElement.validationMessage
+        );
     } else {
-        // Если проходит, скроем
-        hideInputError(formInput);
+        hideInputError(formElement, inputElement);
     }
 };
 
-// Вызовем функцию isValid на каждый ввод символа
-formInput.addEventListener("input", isValid);
+const setEventListeners = (formElement) => {
+    const inputList = Array.from(formElement.querySelectorAll(".popup__input")); //массив инпутов одной формы
+    const buttonElement = formElement.querySelector(".popup__save-button"); //кнопка формы
+
+    // чтобы проверить состояние кнопки в самом начале
+    toggleButtonState(inputList, buttonElement);
+
+    inputList.forEach((inputElement) => {
+        //навешиваем слушатель на каждый из инпутов
+        inputElement.addEventListener("input", function () {
+            checkInputValidity(formElement, inputElement);
+            // чтобы проверять его при изменении любого из полей
+            toggleButtonState(inputList, buttonElement);
+        });
+    });
+};
+
+const enableValidation = () => {
+    const formList = Array.from(document.querySelectorAll(".popup__form")); //массив форм
+    formList.forEach((formElement) => {
+        formElement.addEventListener("submit", function (evt) {
+            evt.preventDefault();
+        });
+        const fieldsetList = Array.from(
+            formElement.querySelectorAll(".popup__set")
+        );
+        fieldsetList.forEach((fieldSet) => {
+            setEventListeners(fieldSet);
+        });
+    });
+};
+
+const hasInvalidInput = (inputList) => {
+    return inputList.some((inputElement) => {
+        return !inputElement.validity.valid;
+    });
+};
+
+const toggleButtonState = (inputList, buttonElement) => {
+    if (hasInvalidInput(inputList)) {
+        buttonElement.classList.add("popup__save-button_inactive");
+    } else {
+        buttonElement.classList.remove("popup__save-button_inactive");
+    }
+};
+
+enableValidation();
