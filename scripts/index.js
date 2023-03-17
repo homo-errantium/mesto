@@ -6,9 +6,6 @@ const places = document.querySelector(".places");
 const profile = document.querySelector(".profile");
 const redactButton = profile.querySelector(".profile__redact-button");
 const addButton = profile.querySelector(".profile__add-button");
-const closeButtonEdit = popupEdit.querySelector(".popup__close");
-const closeButtonAdd = popupAdd.querySelector(".popup__close");
-const closeButtonOpen = popupOpen.querySelector(".popup__close");
 const formPopupEdit = popupEdit.querySelector(".popup__form");
 const formPopupAdd = popupAdd.querySelector(".popup__form");
 const nameInputEdit = popupEdit.querySelector(".popup__input_type_username");
@@ -37,6 +34,7 @@ function creatCard(card) {
     newCardImage.addEventListener("click", handleCardOpen);
     return newCard;
 }
+
 /*-----ф-я удаления карточки------*/
 function handleDeleteButton(event) {
     const deleteCardButton = event.target;
@@ -88,20 +86,24 @@ function resetPopupAddImage() {
     formPopupAdd.reset();
 }
 
+/*-----ф-я закрытия попапа------*/
+const closingPopup = () => {
+    const popupCloseButtonList = Array.from(document.querySelectorAll(".popup__close"));
+    popupCloseButtonList.forEach((popupCloseButton) => {
+        popupCloseButton.addEventListener("click", function(evt) {
+            const popupCloseItem = popupCloseButton.closest(".popup");
+            closePopup(popupCloseItem);
+        });
+    });
+}
+closingPopup();
+
+
 /*------кнопки------*/
-closeButtonOpen.addEventListener("click", () => {
-    closePopup(popupOpen);
-});
 
 addButton.addEventListener("click", () => {
     resetPopupAddImage();
     openPopup(popupAdd);
-});
-closeButtonAdd.addEventListener("click", () => {
-    closePopup(popupAdd);
-});
-closeButtonEdit.addEventListener("click", () => {
-    closePopup(popupEdit);
 });
 
 redactButton.addEventListener("click", () => {
@@ -131,13 +133,13 @@ const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`); //находим нужный спан
     inputElement.classList.add("popup__input_type_error"); //стилизуем нужный инпут при ошибке
     errorElement.textContent = errorMessage; // помещаем в спан стандартный текст ошибки
-    errorElement.classList.add("popup__input-error_active"); //стилизуем спан?
+    errorElement.classList.add("popup__input-error-text"); //стилизуем спан?
 };
 
 const hideInputError = (formElement, inputElement) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`); //находим нужный спан
     inputElement.classList.remove("popup__input_type_error"); // удаляем класс ошибки
-    errorElement.classList.remove("popup__input-error_active"); //удаляем видимость спана ошибки
+    errorElement.classList.remove("popup__input-error-text"); //удаляем видимость спана ошибки
     errorElement.textContent = ""; //очищаем спан
 };
 
@@ -196,8 +198,10 @@ const hasInvalidInput = (inputList) => {
 const toggleButtonState = (inputList, buttonElement) => {
     if (hasInvalidInput(inputList)) {
         buttonElement.classList.add("popup__save-button_inactive");
+        buttonElement.setAttribute("disabled", "disabled");
     } else {
         buttonElement.classList.remove("popup__save-button_inactive");
+        buttonElement.removeAttribute("disabled", "disabled");
     }
 };
 

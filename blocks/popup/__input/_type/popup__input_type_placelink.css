@@ -1,7 +1,5 @@
 .popup__input_type_placelink {
     resize: none;
-    margin-top: 21px;
-    /* margin-bottom: 48px; */
 }
 
 @media screen and (max-width: 767px) {
