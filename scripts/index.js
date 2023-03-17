@@ -57,7 +57,7 @@ function handleLikeButton(event) {
     likeCardButton.classList.toggle("places__like-logo_active");
 }
 
-/*--------обр-к открытие/закрытие попап-а------*/
+/*--------обр-к открытие попап-а------*/
 function handleCardOpen(event) {
     const clickImage = event.target;
     vieweImage.setAttribute("src", clickImage.src);
