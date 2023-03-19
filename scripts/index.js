@@ -71,7 +71,7 @@ function handleCardOpen(event) {
 
 /*--------ф-я открытия/закрытия попап-а------*/
 function openPopup(popup) {
-    checkButtonState(popup);
+    checkButtonState(popup, selectors);
     popup.classList.add("popup_opened");
     closePopupOverlay(popup);
 }
@@ -173,18 +173,18 @@ formPopupEdit.addEventListener("submit", handleFormSubmitEdit);
 formPopupAdd.addEventListener("submit", handleFormSubmitAdd);
 
 /*--------показ ошибок валидации-----------*/
-function showInputError(formElement, inputElement, errorMessage) {
+function showInputError(formElement, inputElement, errorMessage, selectors) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`); //находим нужный спан
-    inputElement.classList.add("popup__input_type_error"); //добавляем нужный инпут при ошибке (красную подсветку)
+    inputElement.classList.add(selectors.inputErrorClass); //добавляем нужный инпут при ошибке (красную подсветку)
     errorElement.textContent = errorMessage; // помещаем в спан стандартный текст ошибки
-    errorElement.classList.add("popup__input-error-text"); //стилизуем спан
+    errorElement.classList.add(selectors.errorText); //стилизуем спан
 }
 
 /*--------скрытие ошибок валидации-----------*/
-function hideInputError(formElement, inputElement) {
+function hideInputError(formElement, inputElement, selectors) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`); //находим нужный спан
-    inputElement.classList.remove("popup__input_type_error"); // удаляем класс ошибки (красную подсветку)
-    errorElement.classList.remove("popup__input-error-text"); //удаляем видимость спана ошибки
+    inputElement.classList.remove(selectors.inputErrorClass); // удаляем класс ошибки (красную подсветку)
+    errorElement.classList.remove(selectors.errorText); //удаляем видимость спана ошибки
     errorElement.textContent = ""; //очищаем спан
 }
 
@@ -195,41 +195,52 @@ function checkInputValidity(formElement, inputElement) {
         showInputError(
             formElement,
             inputElement,
-            inputElement.validationMessage
+            inputElement.validationMessage,
+            selectors
         );
     } else {
-        hideInputError(formElement, inputElement);
+        hideInputError(formElement, inputElement, selectors);
     }
 }
 
 /*--------навешивание валидации на поля-----------*/
-function setEventListeners(formElement) {
-    const inputList = Array.from(formElement.querySelectorAll(".popup__input")); //массив инпутов одной формы
-    const buttonElement = formElement.querySelector(".popup__save-button"); //кнопка формы
+function setEventListeners(formElement, selectors) {
+    const inputList = Array.from(
+        formElement.querySelectorAll(selectors.inputSelector)
+    ); //массив инпутов одной формы
+    const buttonElement = formElement.querySelector(
+        selectors.submitButtonSelector
+    ); //кнопка формы
     // чтобы проверить состояние кнопки в самом начале
-    toggleButtonState(inputList, buttonElement);
+    toggleButtonState(inputList, buttonElement, selectors.submitButtonSelector);
+    //навешиваем слушатель на каждый из инпутов в процессе заполнения
     inputList.forEach((inputElement) => {
-        //навешиваем слушатель на каждый из инпутов
         inputElement.addEventListener("input", function () {
             checkInputValidity(formElement, inputElement);
             // чтобы проверять его при изменении любого из полей
-            toggleButtonState(inputList, buttonElement);
+            toggleButtonState(inputList, buttonElement, selectors);
+        });
+        //навешиваем слушатель на каждый из инпутов при переходе
+        inputElement.addEventListener("focusout", (event) => {
+            checkInputValidity(formElement, inputElement);
         });
     });
 }
 
 /*--------навешивание валидации на формы-----------*/
-function enableValidation() {
-    const formList = Array.from(document.querySelectorAll(".popup__form")); //массив форм
+function enableValidation(selectors) {
+    const formList = Array.from(
+        document.querySelectorAll(selectors.formSelector)
+    ); //массив форм
     formList.forEach((formElement) => {
         formElement.addEventListener("submit", function (evt) {
             evt.preventDefault();
         });
         const fieldsetList = Array.from(
-            formElement.querySelectorAll(".popup__set")
+            formElement.querySelectorAll(selectors.fieldSelector)
         );
         fieldsetList.forEach((fieldSet) => {
-            setEventListeners(fieldSet);
+            setEventListeners(fieldSet, selectors);
         });
     });
 }
@@ -242,23 +253,28 @@ function hasInvalidInput(inputList) {
 }
 
 /*--------доступность кнопки-----------*/
-function toggleButtonState(inputList, buttonElement) {
+function toggleButtonState(inputList, buttonElement, selectors) {
     if (hasInvalidInput(inputList)) {
-        buttonElement.classList.add("popup__save-button_inactive");
+        buttonElement.classList.add(selectors.inactiveButtonClass);
         buttonElement.setAttribute("disabled", "disabled");
     } else {
-        buttonElement.classList.remove("popup__save-button_inactive");
+        buttonElement.classList.remove(selectors.inactiveButtonClass);
         buttonElement.removeAttribute("disabled", "disabled");
     }
 }
 
 /*--------проверка кнопки при повторном вызове попапа-----------*/
-function checkButtonState(popup) {
+function checkButtonState(popup, selectors) {
     if (popup !== popupOpen) {
-        const inputList = Array.from(popup.querySelectorAll(".popup__input"));
-        const buttonElement = popup.querySelector(".popup__save-button");
-        toggleButtonState(inputList, buttonElement);
+        const inputList = Array.from(
+            popup.querySelectorAll(selectors.inputSelector)
+        );
+        const buttonElement = popup.querySelector(
+            selectors.submitButtonSelector
+        );
+        toggleButtonState(inputList, buttonElement, selectors);
     }
 }
+
 /*--------вызов навешивания валидации-----------*/
-enableValidation();
+enableValidation(selectors);
