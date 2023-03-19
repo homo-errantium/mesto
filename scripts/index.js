@@ -48,7 +48,7 @@ function addCard(card) {
     places.prepend(newCardItem);
 }
 
-/*-----ф-я создание каточек из массива-------*/
+/*-----дефолтное создание каточек из массива-------*/
 initialCards.forEach(addCard);
 
 /*----ф-я лайк-----*/
@@ -69,43 +69,73 @@ function handleCardOpen(event) {
     openPopup(popupOpen);
 }
 
+/*--------ф-я открытия/закрытия попап-а------*/
 function openPopup(popup) {
     popup.classList.add("popup_opened");
 }
 
 function closePopup(popup) {
+    cleanErrorInput(popup);
     popup.classList.remove("popup_opened");
 }
 
+/*--------ф-я очитски валидации------*/
+function cleanErrorInput(currentPopup) {
+    const cleanErrorTextList = Array.from(
+        currentPopup.querySelectorAll(".popup__input-error-text")
+    );
+    cleanErrorTextList.forEach((cleanErrorItem) => {
+        cleanErrorItem.classList.remove("popup__input-error-text"); //удаляем видимость спана ошибки
+        cleanErrorItem.textContent = ""; //очищаем спан
+    });
+
+    const cleanErrorInputList = Array.from(
+        currentPopup.querySelectorAll(".popup__input_type_error")
+    );
+    cleanErrorInputList.forEach((cleanErrorItem) => {
+        cleanErrorItem.classList.remove("popup__input_type_error"); //удаляем видимость красной линии инпута
+    });
+}
+
+/*--------ф-я дефолтного заполнения полей профайла------*/
 function fillPopupProfileImage() {
     nameInputEdit.value = userNameProfileEdit.textContent; //добавления в ред.окно прежнего имени
     jobInputEdit.value = userInfoProfileEdit.textContent; //добавления в ред.окно прежнего статуса
 }
 
+/*--------ф-я сброса полей формы------*/
 function resetPopupAddImage() {
     formPopupAdd.reset();
 }
 
-/*-----ф-я закрытия попапа------*/
-const closingPopup = () => {
-    const popupCloseButtonList = Array.from(document.querySelectorAll(".popup__close"));
+/*-----обраб-к закрытия попапа------*/
+function handleClosePopup() {
+    const popupCloseButtonList = Array.from(
+        document.querySelectorAll(".popup__close")
+    );
     popupCloseButtonList.forEach((popupCloseButton) => {
-        popupCloseButton.addEventListener("click", function(evt) {
+        popupCloseButton.addEventListener("click", function (evt) {
             const popupCloseItem = popupCloseButton.closest(".popup");
-            closePopup(popupCloseItem);
+            closePopup(popupCloseItem); //ф-я самого закрытия
         });
     });
 }
-closingPopup();
 
+handleClosePopup();
+
+/*--------ф-я закрытия по клавише------*/
+document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+        const currentPopupItem = document.querySelector(".popup_opened");
+        closePopup(currentPopupItem);
+    }
+});
 
 /*------кнопки------*/
-
 addButton.addEventListener("click", () => {
     resetPopupAddImage();
     openPopup(popupAdd);
 });
-
 redactButton.addEventListener("click", () => {
     fillPopupProfileImage(); // для попапа редак-я (сохр прежних данных)
     openPopup(popupEdit);
@@ -119,6 +149,7 @@ function handleFormSubmitEdit(evt) {
     closePopup(popupEdit);
 }
 
+/*--------добавление новых данных-----------*/
 function handleFormSubmitAdd(evt) {
     evt.preventDefault();
     addCard({ name: nameInputAdd.value, link: linkInputAdd.value });
@@ -129,25 +160,27 @@ function handleFormSubmitAdd(evt) {
 formPopupEdit.addEventListener("submit", handleFormSubmitEdit);
 formPopupAdd.addEventListener("submit", handleFormSubmitAdd);
 
+/*--------показ ошибок валидации-----------*/
 const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`); //находим нужный спан
-    inputElement.classList.add("popup__input_type_error"); //стилизуем нужный инпут при ошибке
+    inputElement.classList.add("popup__input_type_error"); //добавляем нужный инпут при ошибке (красную подсветку)
     errorElement.textContent = errorMessage; // помещаем в спан стандартный текст ошибки
-    errorElement.classList.add("popup__input-error-text"); //стилизуем спан?
+    errorElement.classList.add("popup__input-error-text"); //стилизуем спан
 };
 
+/*--------скрытие ошибок валидации-----------*/
 const hideInputError = (formElement, inputElement) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`); //находим нужный спан
-    inputElement.classList.remove("popup__input_type_error"); // удаляем класс ошибки
+    inputElement.classList.remove("popup__input_type_error"); // удаляем класс ошибки (красную подсветку)
     errorElement.classList.remove("popup__input-error-text"); //удаляем видимость спана ошибки
     errorElement.textContent = ""; //очищаем спан
 };
 
+/*--------проверка условий валидации-----------*/
 const checkInputValidity = (formElement, inputElement) => {
     if (!inputElement.validity.valid) {
         //если содержимое невалидно
         showInputError(
-            //пказываем ошибку
             formElement,
             inputElement,
             inputElement.validationMessage
@@ -157,13 +190,12 @@ const checkInputValidity = (formElement, inputElement) => {
     }
 };
 
+/*--------навешивание валидации на поля-----------*/
 const setEventListeners = (formElement) => {
     const inputList = Array.from(formElement.querySelectorAll(".popup__input")); //массив инпутов одной формы
     const buttonElement = formElement.querySelector(".popup__save-button"); //кнопка формы
-
     // чтобы проверить состояние кнопки в самом начале
     toggleButtonState(inputList, buttonElement);
-
     inputList.forEach((inputElement) => {
         //навешиваем слушатель на каждый из инпутов
         inputElement.addEventListener("input", function () {
@@ -174,6 +206,7 @@ const setEventListeners = (formElement) => {
     });
 };
 
+/*--------навешивание валидации на формы-----------*/
 const enableValidation = () => {
     const formList = Array.from(document.querySelectorAll(".popup__form")); //массив форм
     formList.forEach((formElement) => {
@@ -189,12 +222,14 @@ const enableValidation = () => {
     });
 };
 
+/*--------поверка валидации обоих полей в форме-----------*/
 const hasInvalidInput = (inputList) => {
     return inputList.some((inputElement) => {
         return !inputElement.validity.valid;
     });
 };
 
+/*--------доступность кнопки-----------*/
 const toggleButtonState = (inputList, buttonElement) => {
     if (hasInvalidInput(inputList)) {
         buttonElement.classList.add("popup__save-button_inactive");
@@ -205,4 +240,5 @@ const toggleButtonState = (inputList, buttonElement) => {
     }
 };
 
+/*--------вызов навешивания валидации-----------*/
 enableValidation();
