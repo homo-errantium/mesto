@@ -72,6 +72,7 @@ function handleCardOpen(event) {
 /*--------ф-я открытия/закрытия попап-а------*/
 function openPopup(popup) {
     popup.classList.add("popup_opened");
+    closePopupOverlay(popup);
 }
 
 function closePopup(popup) {
@@ -130,6 +131,16 @@ document.addEventListener("keydown", function (e) {
         closePopup(currentPopupItem);
     }
 });
+
+/*--------ф-я закрытия при клике на оверлей------*/
+function closePopupOverlay(popup) {
+    popup.addEventListener("click", function (event) {
+        const target = event.target;
+        if (target.closest(".popup") && !target.closest(".popup__container"))
+            closePopup(popup);
+        else if (target.closest(".popup")) event.stopPropagation();
+    });
+}
 
 /*------кнопки------*/
 addButton.addEventListener("click", () => {
