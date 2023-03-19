@@ -71,6 +71,7 @@ function handleCardOpen(event) {
 
 /*--------ф-я открытия/закрытия попап-а------*/
 function openPopup(popup) {
+    checkButtonState(popup);
     popup.classList.add("popup_opened");
     closePopupOverlay(popup);
 }
@@ -172,23 +173,23 @@ formPopupEdit.addEventListener("submit", handleFormSubmitEdit);
 formPopupAdd.addEventListener("submit", handleFormSubmitAdd);
 
 /*--------показ ошибок валидации-----------*/
-const showInputError = (formElement, inputElement, errorMessage) => {
+function showInputError(formElement, inputElement, errorMessage) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`); //находим нужный спан
     inputElement.classList.add("popup__input_type_error"); //добавляем нужный инпут при ошибке (красную подсветку)
     errorElement.textContent = errorMessage; // помещаем в спан стандартный текст ошибки
     errorElement.classList.add("popup__input-error-text"); //стилизуем спан
-};
+}
 
 /*--------скрытие ошибок валидации-----------*/
-const hideInputError = (formElement, inputElement) => {
+function hideInputError(formElement, inputElement) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`); //находим нужный спан
     inputElement.classList.remove("popup__input_type_error"); // удаляем класс ошибки (красную подсветку)
     errorElement.classList.remove("popup__input-error-text"); //удаляем видимость спана ошибки
     errorElement.textContent = ""; //очищаем спан
-};
+}
 
 /*--------проверка условий валидации-----------*/
-const checkInputValidity = (formElement, inputElement) => {
+function checkInputValidity(formElement, inputElement) {
     if (!inputElement.validity.valid) {
         //если содержимое невалидно
         showInputError(
@@ -199,10 +200,10 @@ const checkInputValidity = (formElement, inputElement) => {
     } else {
         hideInputError(formElement, inputElement);
     }
-};
+}
 
 /*--------навешивание валидации на поля-----------*/
-const setEventListeners = (formElement) => {
+function setEventListeners(formElement) {
     const inputList = Array.from(formElement.querySelectorAll(".popup__input")); //массив инпутов одной формы
     const buttonElement = formElement.querySelector(".popup__save-button"); //кнопка формы
     // чтобы проверить состояние кнопки в самом начале
@@ -215,10 +216,10 @@ const setEventListeners = (formElement) => {
             toggleButtonState(inputList, buttonElement);
         });
     });
-};
+}
 
 /*--------навешивание валидации на формы-----------*/
-const enableValidation = () => {
+function enableValidation() {
     const formList = Array.from(document.querySelectorAll(".popup__form")); //массив форм
     formList.forEach((formElement) => {
         formElement.addEventListener("submit", function (evt) {
@@ -231,17 +232,17 @@ const enableValidation = () => {
             setEventListeners(fieldSet);
         });
     });
-};
+}
 
 /*--------поверка валидации обоих полей в форме-----------*/
-const hasInvalidInput = (inputList) => {
+function hasInvalidInput(inputList) {
     return inputList.some((inputElement) => {
         return !inputElement.validity.valid;
     });
-};
+}
 
 /*--------доступность кнопки-----------*/
-const toggleButtonState = (inputList, buttonElement) => {
+function toggleButtonState(inputList, buttonElement) {
     if (hasInvalidInput(inputList)) {
         buttonElement.classList.add("popup__save-button_inactive");
         buttonElement.setAttribute("disabled", "disabled");
@@ -249,7 +250,15 @@ const toggleButtonState = (inputList, buttonElement) => {
         buttonElement.classList.remove("popup__save-button_inactive");
         buttonElement.removeAttribute("disabled", "disabled");
     }
-};
+}
 
+/*--------проверка кнопки при повторном вызове попапа-----------*/
+function checkButtonState(popup) {
+    if (popup !== popupOpen) {
+        const inputList = Array.from(popup.querySelectorAll(".popup__input"));
+        const buttonElement = popup.querySelector(".popup__save-button");
+        toggleButtonState(inputList, buttonElement);
+    }
+}
 /*--------вызов навешивания валидации-----------*/
 enableValidation();
