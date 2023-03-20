@@ -1,6 +1,5 @@
 const popupEdit = document.querySelector(".popup_type_edit");
 const popupAdd = document.querySelector(".popup_type_add");
-const popupForm = document.querySelector(".popup__form");
 const popupOpen = document.querySelector(".popup_type_open-image");
 const places = document.querySelector(".places");
 const profile = document.querySelector(".profile");
@@ -17,22 +16,18 @@ const userInfoProfileEdit = profile.querySelector(".profile__subtitle");
 const vieweImage = popupOpen.querySelector(".popup__viewe-image");
 const imageTitle = popupOpen.querySelector(".popup__open-image-title");
 
-/*------ф-я создание карточек---------*/
-function creatCard(card) {
-    const newCard = document
-        .querySelector("#placesCardTemplate")
-        .content.cloneNode(true);
-    const newCardImage = newCard.querySelector(".places__image");
-    newCardImage.setAttribute("src", card.link);
-    newCardImage.setAttribute("alt", `фото: ${card.name}`);
-    const newCardHeading = newCard.querySelector(".places__subtitle");
-    newCardHeading.textContent = card.name;
-    const likeButton = newCard.querySelector(".places__like-logo");
-    likeButton.addEventListener("click", handleLikeButton);
-    const deleteButton = newCard.querySelector(".places__delete-button");
-    deleteButton.addEventListener("click", handleDeleteButton);
-    newCardImage.addEventListener("click", handleCardOpen);
-    return newCard;
+/*--------ф-я открытия/закрытия попап-а------*/
+function closePopup(popup) {
+    document.removeEventListener("keydown", escapeButtonClose);
+    cleanErrorInput(popup);
+    popup.classList.remove("popup_opened");
+}
+
+function openPopup(popup) {
+    document.addEventListener("keydown", escapeButtonClose);
+    checkButtonState(popup, selectors);
+    popup.classList.add("popup_opened");
+    closePopupOverlay(popup);
 }
 
 /*-----ф-я удаления карточки------*/
@@ -41,15 +36,6 @@ function handleDeleteButton(event) {
     const deleteCard = deleteCardButton.closest(".places__item");
     deleteCard.remove();
 }
-
-/*-----ф-я добавления карточек в блок-------*/
-function addCard(card) {
-    const newCardItem = creatCard(card);
-    places.prepend(newCardItem);
-}
-
-/*-----дефолтное создание каточек из массива-------*/
-initialCards.forEach(addCard);
 
 /*----ф-я лайк-----*/
 function handleLikeButton(event) {
@@ -69,35 +55,42 @@ function handleCardOpen(event) {
     openPopup(popupOpen);
 }
 
-/*--------ф-я открытия/закрытия попап-а------*/
-function openPopup(popup) {
-    checkButtonState(popup, selectors);
-    popup.classList.add("popup_opened");
-    closePopupOverlay(popup);
-}
-
-function closePopup(popup) {
-    cleanErrorInput(popup);
-    popup.classList.remove("popup_opened");
-}
-
-/*--------ф-я очитски валидации------*/
-function cleanErrorInput(currentPopup) {
-    const cleanErrorTextList = Array.from(
-        currentPopup.querySelectorAll(".popup__input-error-text")
-    );
-    cleanErrorTextList.forEach((cleanErrorItem) => {
-        cleanErrorItem.classList.remove("popup__input-error-text"); //удаляем видимость спана ошибки
-        cleanErrorItem.textContent = ""; //очищаем спан
-    });
-
-    const cleanErrorInputList = Array.from(
-        currentPopup.querySelectorAll(".popup__input_type_error")
-    );
-    cleanErrorInputList.forEach((cleanErrorItem) => {
-        cleanErrorItem.classList.remove("popup__input_type_error"); //удаляем видимость красной линии инпута
+/*--------ф-я закрытия при клике на оверлей------*/
+function closePopupOverlay(popup) {
+    popup.addEventListener("click", function (event) {
+        const target = event.target;
+        if (target.closest(".popup") && !target.closest(".popup__container"))
+            closePopup(popup);
+        else if (target.closest(".popup")) event.stopPropagation();
     });
 }
+
+/*------ф-я создание карточек---------*/
+function creatCard(card) {
+    const newCard = document
+        .querySelector("#placesCardTemplate")
+        .content.cloneNode(true);
+    const newCardImage = newCard.querySelector(".places__image");
+    newCardImage.setAttribute("src", card.link);
+    newCardImage.setAttribute("alt", `фото: ${card.name}`);
+    const newCardHeading = newCard.querySelector(".places__subtitle");
+    newCardHeading.textContent = card.name;
+    const likeButton = newCard.querySelector(".places__like-logo");
+    likeButton.addEventListener("click", handleLikeButton);
+    const deleteButton = newCard.querySelector(".places__delete-button");
+    deleteButton.addEventListener("click", handleDeleteButton);
+    newCardImage.addEventListener("click", handleCardOpen);
+    return newCard;
+}
+
+/*-----ф-я добавления карточек в блок-------*/
+function addCard(card) {
+    const newCardItem = creatCard(card);
+    places.prepend(newCardItem);
+}
+
+/*-----дефолтное создание каточек из массива-------*/
+initialCards.forEach(addCard);
 
 /*--------ф-я дефолтного заполнения полей профайла------*/
 function fillPopupProfileImage() {
@@ -126,21 +119,11 @@ function handleClosePopup() {
 handleClosePopup();
 
 /*--------ф-я закрытия по клавише------*/
-document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") {
+function escapeButtonClose(event) {
+    if (event.key === "Escape") {
         const currentPopupItem = document.querySelector(".popup_opened");
         closePopup(currentPopupItem);
     }
-});
-
-/*--------ф-я закрытия при клике на оверлей------*/
-function closePopupOverlay(popup) {
-    popup.addEventListener("click", function (event) {
-        const target = event.target;
-        if (target.closest(".popup") && !target.closest(".popup__container"))
-            closePopup(popup);
-        else if (target.closest(".popup")) event.stopPropagation();
-    });
 }
 
 /*------кнопки------*/
@@ -171,110 +154,6 @@ function handleFormSubmitAdd(evt) {
 /*-----обр-к создания/редактирования карточки----*/
 formPopupEdit.addEventListener("submit", handleFormSubmitEdit);
 formPopupAdd.addEventListener("submit", handleFormSubmitAdd);
-
-/*--------показ ошибок валидации-----------*/
-function showInputError(formElement, inputElement, errorMessage, selectors) {
-    const errorElement = formElement.querySelector(`.${inputElement.id}-error`); //находим нужный спан
-    inputElement.classList.add(selectors.inputErrorClass); //добавляем нужный инпут при ошибке (красную подсветку)
-    errorElement.textContent = errorMessage; // помещаем в спан стандартный текст ошибки
-    errorElement.classList.add(selectors.errorText); //стилизуем спан
-}
-
-/*--------скрытие ошибок валидации-----------*/
-function hideInputError(formElement, inputElement, selectors) {
-    const errorElement = formElement.querySelector(`.${inputElement.id}-error`); //находим нужный спан
-    inputElement.classList.remove(selectors.inputErrorClass); // удаляем класс ошибки (красную подсветку)
-    errorElement.classList.remove(selectors.errorText); //удаляем видимость спана ошибки
-    errorElement.textContent = ""; //очищаем спан
-}
-
-/*--------проверка условий валидации-----------*/
-function checkInputValidity(formElement, inputElement) {
-    if (!inputElement.validity.valid) {
-        //если содержимое невалидно
-        showInputError(
-            formElement,
-            inputElement,
-            inputElement.validationMessage,
-            selectors
-        );
-    } else {
-        hideInputError(formElement, inputElement, selectors);
-    }
-}
-
-/*--------навешивание валидации на поля-----------*/
-function setEventListeners(formElement, selectors) {
-    const inputList = Array.from(
-        formElement.querySelectorAll(selectors.inputSelector)
-    ); //массив инпутов одной формы
-    const buttonElement = formElement.querySelector(
-        selectors.submitButtonSelector
-    ); //кнопка формы
-    // чтобы проверить состояние кнопки в самом начале
-    toggleButtonState(inputList, buttonElement, selectors.submitButtonSelector);
-    //навешиваем слушатель на каждый из инпутов в процессе заполнения
-    inputList.forEach((inputElement) => {
-        inputElement.addEventListener("input", function () {
-            checkInputValidity(formElement, inputElement);
-            // чтобы проверять его при изменении любого из полей
-            toggleButtonState(inputList, buttonElement, selectors);
-        });
-        //навешиваем слушатель на каждый из инпутов при переходе
-        inputElement.addEventListener("focusout", (event) => {
-            checkInputValidity(formElement, inputElement);
-        });
-    });
-}
-
-/*--------навешивание валидации на формы-----------*/
-function enableValidation(selectors) {
-    const formList = Array.from(
-        document.querySelectorAll(selectors.formSelector)
-    ); //массив форм
-    formList.forEach((formElement) => {
-        formElement.addEventListener("submit", function (evt) {
-            evt.preventDefault();
-        });
-        const fieldsetList = Array.from(
-            formElement.querySelectorAll(selectors.fieldSelector)
-        );
-        fieldsetList.forEach((fieldSet) => {
-            setEventListeners(fieldSet, selectors);
-        });
-    });
-}
-
-/*--------поверка валидации обоих полей в форме-----------*/
-function hasInvalidInput(inputList) {
-    return inputList.some((inputElement) => {
-        return !inputElement.validity.valid;
-    });
-}
-
-/*--------доступность кнопки-----------*/
-function toggleButtonState(inputList, buttonElement, selectors) {
-    if (hasInvalidInput(inputList)) {
-        buttonElement.classList.add(selectors.inactiveButtonClass);
-        buttonElement.setAttribute("disabled", "disabled");
-    } else {
-        buttonElement.classList.remove(selectors.inactiveButtonClass);
-        buttonElement.removeAttribute("disabled", "disabled");
-    }
-}
-
-/*--------проверка кнопки при повторном вызове попапа-----------*/
-function checkButtonState(popup, selectors) {
-    if (popup !== popupOpen) {
-        const inputList = Array.from(
-            popup.querySelectorAll(selectors.inputSelector)
-        );
-        const buttonElement = popup.querySelector(
-            selectors.submitButtonSelector
-        );
-        toggleButtonState(inputList, buttonElement, selectors);
-    }
-}
 
 /*--------вызов навешивания валидации-----------*/
 enableValidation(selectors);
