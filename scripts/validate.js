@@ -81,26 +81,28 @@ function hasInvalidInput(inputList) {
 /*--------доступность кнопки-----------*/
 function toggleButtonState(inputList, buttonElement, selectors) {
     if (hasInvalidInput(inputList)) {
-        buttonElement.classList.add(selectors.inactiveButtonClass);
-        buttonElement.setAttribute("disabled", "disabled");
+        disableSubmitButton(buttonElement, selectors);
     } else {
-        buttonElement.classList.remove(selectors.inactiveButtonClass);
-        buttonElement.removeAttribute("disabled", "disabled");
+        enableSubmitButton(buttonElement, selectors);
     }
 }
 
-/*--------проверка кнопки при повторном вызове попапа-----------*/
-function checkButtonState(popup, selectors) {
-    const buttonElement = popup.querySelector(selectors.submitButtonSelector);
-    if (popup === popupAdd) {
-        const inputList = Array.from(
-            popup.querySelectorAll(selectors.inputSelector)
-        );
+/*--------отключение кнопки-сабмита-----------*/
+// function disableSubmitButton(popup, selectors) {
+//     const buttonElement = popup.querySelector(selectors.submitButtonSelector);
+//     buttonElement.classList.add(selectors.inactiveButtonClass);
+//     buttonElement.setAttribute("disabled", "disabled");
+// }
 
-        toggleButtonState(inputList, buttonElement, selectors);
-    } else if (popup === popupEdit) {
-        buttonElement.classList.add(selectors.inactiveButtonClass);
-    }
+/*--------отключение кнопки-сабмита-----------*/
+function disableSubmitButton(buttonElement, selectors) {
+    buttonElement.classList.add(selectors.inactiveButtonClass);
+    buttonElement.setAttribute("disabled", "disabled");
+}
+
+function enableSubmitButton(buttonElement, selectors) {
+    buttonElement.classList.remove(selectors.inactiveButtonClass);
+    buttonElement.removeAttribute("disabled", "disabled");
 }
 
 /*--------ф-я очитски валидации------*/

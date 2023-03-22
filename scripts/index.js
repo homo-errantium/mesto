@@ -5,8 +5,9 @@ const places = document.querySelector(".places");
 const profile = document.querySelector(".profile");
 const redactButton = profile.querySelector(".profile__redact-button");
 const addButton = profile.querySelector(".profile__add-button");
-const formPopupEdit = popupEdit.querySelector(".popup__form");
-const formPopupAdd = popupAdd.querySelector(".popup__form");
+const formCollection = document.forms;
+const formPopupEdit = formCollection.popupEditForm;
+const formPopupAdd = formCollection.popupAddForm;
 const nameInputEdit = popupEdit.querySelector(".popup__input_type_username");
 const nameInputAdd = popupAdd.querySelector(".popup__input_type_placename");
 const jobInputEdit = popupEdit.querySelector(".popup__input_type_userinfo");
@@ -18,16 +19,13 @@ const imageTitle = popupOpen.querySelector(".popup__open-image-title");
 
 /*--------ф-я открытия/закрытия попап-а------*/
 function closePopup(popup) {
-    document.removeEventListener("keydown", escapeButtonClose);
-    cleanErrorInput(popup);
+    document.removeEventListener("keydown", handleEscapeButton);
     popup.classList.remove("popup_opened");
 }
 
 function openPopup(popup) {
-    document.addEventListener("keydown", escapeButtonClose);
-    checkButtonState(popup, selectors);
+    document.addEventListener("keydown", handleEscapeButton);
     popup.classList.add("popup_opened");
-    closePopupOverlay(popup);
 }
 
 /*-----ф-я удаления карточки------*/
@@ -56,14 +54,21 @@ function handleCardOpen(event) {
 }
 
 /*--------ф-я закрытия при клике на оверлей------*/
-function closePopupOverlay(popup) {
-    popup.addEventListener("click", function (event) {
-        const target = event.target;
-        if (target.closest(".popup") && !target.closest(".popup__container"))
-            closePopup(popup);
-        else if (target.closest(".popup")) event.stopPropagation();
+function closePopupOverlay(selectors) {
+    const popupList = Array.from(document.querySelectorAll(".popup"));
+    popupList.forEach((popupElement) => {
+        popupElement.addEventListener("mousedown", (evt) => {
+            if (evt.target.classList.contains("popup_opened")) {
+                closePopup(popupElement);
+            }
+            if (evt.target.classList.contains("popup__close")) {
+                closePopup(popupElement);
+            }
+        });
     });
 }
+
+closePopupOverlay(selectors);
 
 /*------ф-я создание карточек---------*/
 function creatCard(card) {
@@ -98,9 +103,17 @@ function fillPopupProfileImage() {
     jobInputEdit.value = userInfoProfileEdit.textContent; //добавления в ред.окно прежнего статуса
 }
 
-/*--------ф-я сброса полей формы------*/
-function resetPopupAddImage() {
-    formPopupAdd.reset();
+/*--------проверка кнопки при повторном вызове попапа-----------*/
+function checkButtonState(popup, selectors) {
+    const buttonElement = popup.querySelector(selectors.submitButtonSelector);
+    if (popup === popupAdd) {
+        const inputList = Array.from(
+            popup.querySelectorAll(selectors.inputSelector)
+        );
+        toggleButtonState(inputList, buttonElement, selectors);
+    } else if (popup === popupEdit) {
+        disableSubmitButton(popupEdit, selectors);
+    }
 }
 
 /*-----обраб-к закрытия попапа------*/
@@ -119,7 +132,7 @@ function handleClosePopup() {
 handleClosePopup();
 
 /*--------ф-я закрытия по клавише------*/
-function escapeButtonClose(event) {
+function handleEscapeButton(event) {
     if (event.key === "Escape") {
         const currentPopupItem = document.querySelector(".popup_opened");
         closePopup(currentPopupItem);
@@ -128,10 +141,17 @@ function escapeButtonClose(event) {
 
 /*------кнопки------*/
 addButton.addEventListener("click", () => {
-    resetPopupAddImage();
+    checkButtonState(popupAdd, selectors);
     openPopup(popupAdd);
 });
+
 redactButton.addEventListener("click", () => {
+    cleanErrorInput(popupEdit);
+    const submitButtonEdit = popupEdit.querySelector(
+        selectors.submitButtonSelector
+    );
+    disableSubmitButton(submitButtonEdit, selectors); // чтобы при открытии кнопка была неактивной (наставник)
+    // checkButtonState(popupEdit, selectors);
     fillPopupProfileImage(); // для попапа редак-я (сохр прежних данных)
     openPopup(popupEdit);
 });
@@ -142,6 +162,9 @@ function handleFormSubmitEdit(evt) {
     userNameProfileEdit.textContent = nameInputEdit.value;
     userInfoProfileEdit.textContent = jobInputEdit.value;
     closePopup(popupEdit);
+    evt.target.reset();
+    // const submitButtonEdit = popupEdit.querySelector(selectors.submitButtonSelector);
+    // disableSubmitButton(submitButtonEdit, selectors); // не используется, т.к. без сабмита будет активной
 }
 
 /*--------добавление новых данных-----------*/
@@ -149,6 +172,9 @@ function handleFormSubmitAdd(evt) {
     evt.preventDefault();
     addCard({ name: nameInputAdd.value, link: linkInputAdd.value });
     closePopup(popupAdd);
+    evt.target.reset();
+    const buttonAdd = popupAdd.querySelector(selectors.submitButtonSelector);
+    disableSubmitButton(buttonAdd, selectors);
 }
 
 /*-----обр-к создания/редактирования карточки----*/
