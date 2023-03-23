@@ -37,8 +37,7 @@ function setEventListeners(formElement, selectors) {
     const buttonElement = formElement.querySelector(
         selectors.submitButtonSelector
     ); //кнопка формы
-    // чтобы проверить состояние кнопки в самом начале
-    toggleButtonState(inputList, buttonElement, selectors.submitButtonSelector);
+    disableSubmitButton(buttonElement, selectors);
     //навешиваем слушатель на каждый из инпутов в процессе заполнения
     inputList.forEach((inputElement) => {
         inputElement.addEventListener("input", function () {

@@ -103,19 +103,6 @@ function fillPopupProfileImage() {
     jobInputEdit.value = userInfoProfileEdit.textContent; //добавления в ред.окно прежнего статуса
 }
 
-/*--------проверка кнопки при повторном вызове попапа-----------*/
-function checkButtonState(popup, selectors) {
-    const buttonElement = popup.querySelector(selectors.submitButtonSelector);
-    if (popup === popupAdd) {
-        const inputList = Array.from(
-            popup.querySelectorAll(selectors.inputSelector)
-        );
-        toggleButtonState(inputList, buttonElement, selectors);
-    } else if (popup === popupEdit) {
-        disableSubmitButton(popupEdit, selectors);
-    }
-}
-
 /*-----обраб-к закрытия попапа------*/
 function handleClosePopup() {
     const popupCloseButtonList = Array.from(
@@ -141,7 +128,6 @@ function handleEscapeButton(event) {
 
 /*------кнопки------*/
 addButton.addEventListener("click", () => {
-    checkButtonState(popupAdd, selectors);
     openPopup(popupAdd);
 });
 
@@ -151,7 +137,6 @@ redactButton.addEventListener("click", () => {
         selectors.submitButtonSelector
     );
     disableSubmitButton(submitButtonEdit, selectors); // чтобы при открытии кнопка была неактивной (наставник)
-    // checkButtonState(popupEdit, selectors);
     fillPopupProfileImage(); // для попапа редак-я (сохр прежних данных)
     openPopup(popupEdit);
 });
@@ -162,9 +147,6 @@ function handleFormSubmitEdit(evt) {
     userNameProfileEdit.textContent = nameInputEdit.value;
     userInfoProfileEdit.textContent = jobInputEdit.value;
     closePopup(popupEdit);
-    evt.target.reset();
-    // const submitButtonEdit = popupEdit.querySelector(selectors.submitButtonSelector);
-    // disableSubmitButton(submitButtonEdit, selectors); // не используется, т.к. без сабмита будет активной
 }
 
 /*--------добавление новых данных-----------*/
@@ -173,7 +155,7 @@ function handleFormSubmitAdd(evt) {
     addCard({ name: nameInputAdd.value, link: linkInputAdd.value });
     closePopup(popupAdd);
     evt.target.reset();
-    const buttonAdd = popupAdd.querySelector(selectors.submitButtonSelector);
+    const buttonAdd = evt.submitter;
     disableSubmitButton(buttonAdd, selectors);
 }
 
