@@ -38,7 +38,7 @@ function handleDeleteButton(event) {
 /*----ф-я лайк-----*/
 function handleLikeButton(event) {
     const likeCardButton = event.target;
-    likeCardButton.classList.toggle("places__like-logo_active");
+    likeCardButton.classList.toggle("places__like-logo_active"); //+
 }
 
 /*--------обр-к открытие попап-а------*/
@@ -74,12 +74,12 @@ closePopupOverlay(selectors);
 function creatCard(card) {
     const newCard = document
         .querySelector("#placesCardTemplate")
-        .content.cloneNode(true);
-    const newCardImage = newCard.querySelector(".places__image");
-    newCardImage.setAttribute("src", card.link);
-    newCardImage.setAttribute("alt", `фото: ${card.name}`);
-    const newCardHeading = newCard.querySelector(".places__subtitle");
-    newCardHeading.textContent = card.name;
+        .content.cloneNode(true); // +
+    const newCardImage = newCard.querySelector(".places__image"); //+
+    newCardImage.setAttribute("src", card.link); // +
+    newCardImage.setAttribute("alt", `фото: ${card.name}`); //+
+    const newCardHeading = newCard.querySelector(".places__subtitle"); //+
+    newCardHeading.textContent = card.name; //+
     const likeButton = newCard.querySelector(".places__like-logo");
     likeButton.addEventListener("click", handleLikeButton);
     const deleteButton = newCard.querySelector(".places__delete-button");
