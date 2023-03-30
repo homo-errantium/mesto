@@ -80,11 +80,11 @@ function creatCard(card) {
     newCardImage.setAttribute("alt", `фото: ${card.name}`); //+
     const newCardHeading = newCard.querySelector(".places__subtitle"); //+
     newCardHeading.textContent = card.name; //+
-    const likeButton = newCard.querySelector(".places__like-logo");
-    likeButton.addEventListener("click", handleLikeButton);
-    const deleteButton = newCard.querySelector(".places__delete-button");
-    deleteButton.addEventListener("click", handleDeleteButton);
-    newCardImage.addEventListener("click", handleCardOpen);
+    const likeButton = newCard.querySelector(".places__like-logo"); //+
+    likeButton.addEventListener("click", handleLikeButton); //+
+    const deleteButton = newCard.querySelector(".places__delete-button"); //+
+    deleteButton.addEventListener("click", handleDeleteButton); //+
+    newCardImage.addEventListener("click", handleCardOpen); //+
     return newCard;
 }
 

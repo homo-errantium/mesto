@@ -42,38 +42,57 @@ class Card {
     generateCard() {
         this._element = this._getTemplate();
         this._setEventListeners();
-        this._element
-            .querySelector(".places__image")
-            .setAttribute("src", this._image);
-        this._element
-            .querySelector(".places__image")
-            .setAttribute("alt", `фото: ${this._title}`);
+        const newCardImage = this._element.querySelector(".places__image");
+        newCardImage.setAttribute("src", this._image);
+        newCardImage.setAttribute("alt", `фото: ${this._title}`);
         this._element.querySelector(".places__subtitle").textContent =
             this._title;
         return this._element;
     }
 
     _setEventListeners() {
-        this._element
-            .querySelector(".places__like-logo")
-            .addEventListener("click", () => {
-                this._handleLikeButton();
-            });
+        const likeButton = this._element.querySelector(".places__like-logo");
+        likeButton.addEventListener("click", () => {
+            this._handleLikeButton(likeButton);
+        });
+
+        const deleteButton = this._element.querySelector(
+            ".places__delete-button"
+        );
+        deleteButton.addEventListener("click", () => {
+            this._handleDeleteButton(deleteButton);
+        });
+
+        const newCardImage = this._element.querySelector(".places__image");
+        newCardImage.addEventListener("click", () => {
+            this._handleCardOpen(newCardImage);
+        });
     }
 
-    _handleLikeButton() {
-        this._element
-            .querySelector(".places__like-logo")
-            .classList.toggle("places__like-logo_active");
+    //нужно переделать!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    _handleCardOpen(newCardImage) {
+        const vieweImage = document.querySelector(".popup__viewe-image");
+        vieweImage.setAttribute("src", newCardImage.src);
+        const clickImageItem = newCardImage.closest(".places__item");
+        const textImage =
+            clickImageItem.querySelector(".places__subtitle").textContent;
+        vieweImage.setAttribute("alt", `фото: ${textImage}`);
+        imageTitle.textContent = textImage;
+        openPopup(popupOpen);
+    }
+
+    _handleDeleteButton(deleteButton) {
+        const deleteCard = deleteButton.closest(".places__item");
+        deleteCard.remove();
+    }
+
+    _handleLikeButton(likeButton) {
+        likeButton.classList.toggle("places__like-logo_active");
     }
 }
 
 initCards.forEach((item) => {
-    // Создадим экземпляр карточки
     const card = new Card(item);
-    // Создаём карточку и возвращаем наружу
     const cardElement = card.generateCard();
-
-    // Добавляем в DOM
     document.body.append(cardElement);
 });
