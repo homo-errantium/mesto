@@ -87,13 +87,6 @@ function toggleButtonState(inputList, buttonElement, selectors) {
 }
 
 /*--------отключение кнопки-сабмита-----------*/
-// function disableSubmitButton(popup, selectors) {
-//     const buttonElement = popup.querySelector(selectors.submitButtonSelector);
-//     buttonElement.classList.add(selectors.inactiveButtonClass);
-//     buttonElement.setAttribute("disabled", "disabled");
-// }
-
-/*--------отключение кнопки-сабмита-----------*/
 function disableSubmitButton(buttonElement, selectors) {
     buttonElement.classList.add(selectors.inactiveButtonClass);
     buttonElement.setAttribute("disabled", "disabled");
