@@ -71,31 +71,45 @@ function closePopupOverlay(selectors) {
 closePopupOverlay(selectors);
 
 /*------ф-я создание карточек---------*/
-function creatCard(card) {
-    const newCard = document
-        .querySelector("#placesCardTemplate")
-        .content.cloneNode(true); // +
-    const newCardImage = newCard.querySelector(".places__image"); //+
-    newCardImage.setAttribute("src", card.link); // +
-    newCardImage.setAttribute("alt", `фото: ${card.name}`); //+
-    const newCardHeading = newCard.querySelector(".places__subtitle"); //+
-    newCardHeading.textContent = card.name; //+
-    const likeButton = newCard.querySelector(".places__like-logo"); //+
-    likeButton.addEventListener("click", handleLikeButton); //+
-    const deleteButton = newCard.querySelector(".places__delete-button"); //+
-    deleteButton.addEventListener("click", handleDeleteButton); //+
-    newCardImage.addEventListener("click", handleCardOpen); //+
-    return newCard;
-}
+// function creatCard(card) {
+//     const newCard = document
+//         .querySelector("#placesCardTemplate")
+//         .content.cloneNode(true); // +
+//     const newCardImage = newCard.querySelector(".places__image"); //+
+//     newCardImage.setAttribute("src", card.link); // +
+//     newCardImage.setAttribute("alt", `фото: ${card.name}`); //+
+//     const newCardHeading = newCard.querySelector(".places__subtitle"); //+
+//     newCardHeading.textContent = card.name; //+
+//     const likeButton = newCard.querySelector(".places__like-logo"); //+
+//     likeButton.addEventListener("click", handleLikeButton); //+
+//     const deleteButton = newCard.querySelector(".places__delete-button"); //+
+//     deleteButton.addEventListener("click", handleDeleteButton); //+
+//     newCardImage.addEventListener("click", handleCardOpen); //+
+//     return newCard;
+// }
+
+// /*-----ф-я добавления карточек в блок-------*/
+// function addCard(card) {
+//     const newCardItem = creatCard(card);
+//     places.prepend(newCardItem);
+// }
 
 /*-----ф-я добавления карточек в блок-------*/
-function addCard(card) {
-    const newCardItem = creatCard(card);
-    places.prepend(newCardItem);
+function addCard(item) {
+    const card = new Card(item);
+    const cardElement = card.generateCard();
+    places.prepend(cardElement);
 }
 
 /*-----дефолтное создание каточек из массива-------*/
 initialCards.forEach(addCard);
+
+// // перенести в основной
+// initCards.forEach((item) => {
+//     const card = new Card(item);
+//     const cardElement = card.generateCard();
+//     places.prepend(cardElement);
+// });
 
 /*--------ф-я дефолтного заполнения полей профайла------*/
 function fillPopupProfileImage() {
