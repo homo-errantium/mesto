@@ -147,4 +147,8 @@ formPopupEdit.addEventListener("submit", handleFormSubmitEdit);
 formPopupAdd.addEventListener("submit", handleFormSubmitAdd);
 
 /*--------вызов навешивания валидации-----------*/
-enableValidation(selectors);
+// enableValidation(selectors);
+const formPopupEditValidator = new FormValidator(formPopupEdit, selectors);
+formPopupEditValidator.enableValidation();
+const formPopupAddValidator = new FormValidator(formPopupAdd, selectors);
+formPopupAddValidator.enableValidation();

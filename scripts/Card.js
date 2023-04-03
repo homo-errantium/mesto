@@ -39,7 +39,7 @@ class Card {
     }
 
     /*-----открытие режима просмотра-----*/
-    _handleCardOpen(event) {
+    _handleCardOpen() {
         const currentCardImage = event.target;
         const vieweImage = document.querySelector(".popup__viewe-image");
         vieweImage.setAttribute("src", currentCardImage.src);
@@ -52,13 +52,13 @@ class Card {
     }
 
     /*-----удаление карточки-----*/
-    _handleDeleteButton(event) {
+    _handleDeleteButton() {
         const deleteCard = event.target.closest(".places__item");
         deleteCard.remove();
     }
 
     /*-----лайк карточки-----*/
-    _handleLikeButton(event) {
+    _handleLikeButton() {
         const likeButton = event.target;
         likeButton.classList.toggle("places__like-logo_active");
     }

@@ -1,5 +1,6 @@
 class FormValidator {
     constructor(formElement, selectors) {
+        this._form = formElement;
         this._formSelector = selectors.formSelector;
         this._inputSelector = selectors.inputSelector;
         this._submitButtonSelector = selectors.submitButtonSelector;
@@ -11,9 +12,7 @@ class FormValidator {
         this._formList = Array.from(
             document.querySelectorAll(this._formSelector)
         );
-        this._fieldsetList = Array.from(
-            formElement.querySelectorAll(this._fieldSelector)
-        );
+
         this._errorTextClass = selectors.errorTextClass;
         this._fieldSelector = selectors.fieldSelector;
         this._popupCloseClass = selectors.popupCloseClass;
@@ -23,78 +22,81 @@ class FormValidator {
     }
     /*--------навешивание обработчиков на формы-----------*/
     enableValidation() {
-        this._formList.forEach((formElement) => {
-            formElement.addEventListener("submit", function (evt) {
-                evt.preventDefault();
-            });
-            this._fieldsetList.forEach((fieldSet) => {
-                this._setEventListeners();
-            });
+        this._form.addEventListener("submit", (evt) => {
+            evt.preventDefault();
         });
+        this._setEventListeners();
     }
 
     /*--------навешивание валидации на поля-----------*/
     _setEventListeners() {
-        _disableSubmitButton();
+        this._disableSubmitBtn();
         this._inputList.forEach((inputElement) => {
-            this._inputElement.addEventListener("input", () => {
-                _checkInputValidity(inputElement);
-                _toggleButtonState();
+            inputElement.addEventListener("input", () => {
+                this._checkInputValidity(inputElement);
+                this._toggleButtonState();
             });
-            this._inputElement.addEventListener("focusout", (event) => {
-                _checkInputValidity(inputElement);
+            inputElement.addEventListener("focusout", (event) => {
+                this._checkInputValidity(inputElement);
             });
         });
+    }
+
+    /*--------отключение кнопки-сабмита-----------*/
+    _disableSubmitBtn() {
+        this._buttonElement.classList.add(this._inactiveButtonClass);
+        this._buttonElement.setAttribute("disabled", "disabled");
+    }
+
+    _enableSubmitBtn() {
+        this._buttonElement.classList.remove(this._inactiveButtonClass);
+        this._buttonElement.removeAttribute("disabled", "disabled");
     }
 
     /*--------проверка условий валидации-----------*/
     _checkInputValidity(inputElement) {
         if (!inputElement.validity.valid) {
             //если содержимое невалидно
-            this._showInputError(
-                formElement,
-                inputElement,
-                inputElement.validationMessage
-            );
+            this._showInputError(inputElement);
         } else {
-            this._hideInputError(formElement, inputElement);
+            this._hideInputError(inputElement);
         }
     }
 
     /*--------доступность кнопки-----------*/
     _toggleButtonState() {
-        if (hasInvalidInput(inputList)) {
-            this._disableSubmitButton(this._buttonElement);
+        if (this._hasInvalidInput()) {
+            this._disableSubmitBtn();
         } else {
-            this._enableSubmitButton(buttonElement);
+            this._enableSubmitBtn();
         }
+    }
+
+    /*--------поверка валидации обоих полей в форме-----------*/
+    _hasInvalidInput() {
+        return this._inputList.some((inputElement) => {
+            return !inputElement.validity.valid;
+        });
     }
 
     /*--------показ ошибок валидации-----------*/
     _showInputError(inputElement) {
-        this._errorElement = this._formElement.querySelector(
+        this._errorElement = this._form.querySelector(
             `.${inputElement.id}-error`
         ); //находим нужный спан
         inputElement.classList.add(this._inputErrorClass); //добавляем нужный инпут при ошибке (красную подсветку)
         this._errorElement.classList.add(this._errorTextClass); //стилизуем спан
-        this._errorElement.textContent = errorMessage; // помещаем в спан стандартный текст ошибки
+        this._errorElement.textContent = inputElement.validationMessage;
     }
 
     /*--------скрытие ошибок валидации-----------*/
     _hideInputError(inputElement) {
-        this._errorElement = this._formElement.querySelector(
+        this._errorElement = this._form.querySelector(
             `.${inputElement.id}-error`
         ); //находим нужный спан
-        this._inputElement.classList.remove(selectors.inputErrorClass); // удаляем класс ошибки (красную подсветку)
-        this._errorElement.classList.remove(selectors.errorTextClass); //удаляем видимость спана ошибки
+        inputElement.classList.remove(this._inputErrorClass); // удаляем класс ошибки (красную подсветку)
+        this._errorElement.classList.remove(this._errorTextClass); //удаляем видимость спана ошибки
         this._errorElement.textContent = ""; //очищаем спан
-    }
-
-    /*--------поверка валидации обоих полей в форме-----------*/
-    _hasInvalidInput(inputList) {
-        return this._inputList.some((inputElement) => {
-            return !inputElement.validity.valid;
-        });
     }
 
     /*--------ф-я очитски валидации------*/
