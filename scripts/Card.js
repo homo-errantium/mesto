@@ -14,51 +14,52 @@ class Card {
 
     /*-----создание карточки-----*/
     generateCard() {
-        this._element = this._getTemplate();
+        this._newCard = this._getTemplate();
         this._setEventListeners();
-        const newCardImage = this._element.querySelector(".places__image");
-        newCardImage.setAttribute("src", this._image);
-        newCardImage.setAttribute("alt", `фото: ${this._title}`);
-        this._element.querySelector(".places__subtitle").textContent =
+        this._newCardImage = this._newCard.querySelector(".places__image");
+        this._newCardImage.setAttribute("src", this._image);
+        this._newCardImage.setAttribute("alt", `фото: ${this._title}`);
+        this._newCard.querySelector(".places__subtitle").textContent =
             this._title;
-        return this._element;
+        return this._newCard;
     }
 
     /*-----навешивание  слушателей-----*/
     _setEventListeners() {
-        const likeButton = this._element.querySelector(".places__like-logo");
-        likeButton.addEventListener("click", this._handleLikeButton);
+        this._likeButton = this._newCard.querySelector(".places__like-logo");
+        this._likeButton.addEventListener("click", this._handleLikeButton);
 
-        const deleteButton = this._element.querySelector(
+        this._deleteButton = this._newCard.querySelector(
             ".places__delete-button"
         );
-        deleteButton.addEventListener("click", this._handleDeleteButton);
+        this._deleteButton.addEventListener("click", this._handleDeleteButton);
 
-        const newCardImage = this._element.querySelector(".places__image");
-        newCardImage.addEventListener("click", this._handleCardOpen);
+        this._newCardImage = this._newCard.querySelector(".places__image");
+        this._newCardImage.addEventListener("click", this._handleCardOpen);
     }
 
     /*-----открытие режима просмотра-----*/
-    _handleCardOpen() {
-        const currentCardImage = event.target;
-        const vieweImage = document.querySelector(".popup__viewe-image");
-        vieweImage.setAttribute("src", currentCardImage.src);
-        const clickImageItem = currentCardImage.closest(".places__item");
-        const textImage =
-            clickImageItem.querySelector(".places__subtitle").textContent;
-        vieweImage.setAttribute("alt", `фото: ${textImage}`);
-        imageTitle.textContent = textImage;
+    _handleCardOpen(event) {
+        this._currentCardImage = event.target;
+        this._clickImageItem = this._currentCardImage.closest(".places__item");
+
+        this._vieweImage = document.querySelector(".popup__viewe-image");
+        this._vieweImage.setAttribute("src", this._currentCardImage.src);
+        this._vieweImage.setAttribute("alt", `фото: ${this._textImage}`);
+        this._textImage =
+            this._clickImageItem.querySelector(".places__subtitle").textContent;
+        imageTitle.textContent = this._textImage;
         openPopup(popupOpen);
     }
 
     /*-----удаление карточки-----*/
-    _handleDeleteButton() {
+    _handleDeleteButton(event) {
         const deleteCard = event.target.closest(".places__item");
         deleteCard.remove();
     }
 
     /*-----лайк карточки-----*/
-    _handleLikeButton() {
+    _handleLikeButton(event) {
         const likeButton = event.target;
         likeButton.classList.toggle("places__like-logo_active");
     }
