@@ -1,7 +1,6 @@
 class FormValidator {
     constructor(formElement, selectors) {
         this._form = formElement;
-        this._formSelector = selectors.formSelector;
         this._inputSelector = selectors.inputSelector;
         this._submitButtonSelector = selectors.submitButtonSelector;
         this._inactiveButtonClass = selectors.inactiveButtonClass;
@@ -9,17 +8,12 @@ class FormValidator {
         this._inputList = Array.from(
             formElement.querySelectorAll(this._inputSelector)
         );
-        this._formList = Array.from(
-            document.querySelectorAll(this._formSelector)
-        );
-
         this._errorTextClass = selectors.errorTextClass;
-        this._fieldSelector = selectors.fieldSelector;
-        this._popupCloseClass = selectors.popupCloseClass;
         this._buttonElement = formElement.querySelector(
             this._submitButtonSelector
         );
     }
+
     /*--------навешивание обработчиков на формы-----------*/
     enableValidation() {
         this._form.addEventListener("submit", (evt) => {
