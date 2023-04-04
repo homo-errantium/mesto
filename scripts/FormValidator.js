@@ -1,4 +1,6 @@
-class FormValidator {
+import { disableSubmitButton, enableSubmitButton } from "./utils.js";
+
+export class FormValidator {
     constructor(formElement, selectors) {
         this._form = formElement;
         this._inputSelector = selectors.inputSelector;
@@ -14,7 +16,7 @@ class FormValidator {
         );
     }
 
-    /*--------навешивание обработчиков на формы-----------*/
+    /*---навешивание обработчиков на формы---*/
     enableValidation() {
         this._form.addEventListener("submit", (evt) => {
             evt.preventDefault();
@@ -24,7 +26,7 @@ class FormValidator {
 
     /*--------навешивание валидации на поля-----------*/
     _setEventListeners() {
-        this._disableSubmitBtn();
+        disableSubmitButton(this._buttonElement);
         this._inputList.forEach((inputElement) => {
             inputElement.addEventListener("input", () => {
                 this._checkInputValidity(inputElement);
@@ -34,17 +36,6 @@ class FormValidator {
                 this._checkInputValidity(inputElement);
             });
         });
-    }
-
-    /*--------отключение кнопки-сабмита-----------*/
-    _disableSubmitBtn() {
-        this._buttonElement.classList.add(this._inactiveButtonClass);
-        this._buttonElement.setAttribute("disabled", "disabled");
-    }
-
-    _enableSubmitBtn() {
-        this._buttonElement.classList.remove(this._inactiveButtonClass);
-        this._buttonElement.removeAttribute("disabled", "disabled");
     }
 
     /*--------проверка условий валидации-----------*/
@@ -60,9 +51,9 @@ class FormValidator {
     /*--------доступность кнопки-----------*/
     _toggleButtonState() {
         if (this._hasInvalidInput()) {
-            this._disableSubmitBtn();
+            disableSubmitButton(this._buttonElement);
         } else {
-            this._enableSubmitBtn();
+            enableSubmitButton(this._buttonElement);
         }
     }
 
@@ -91,23 +82,5 @@ class FormValidator {
         inputElement.classList.remove(this._inputErrorClass); // удаляем класс ошибки (красную подсветку)
         this._errorElement.classList.remove(this._errorTextClass); //удаляем видимость спана ошибки
         this._errorElement.textContent = ""; //очищаем спан
-    }
-
-    /*--------ф-я очитски валидации------*/
-    _cleanErrorInput(currentPopup) {
-        this._cleanErrorTextList = Array.from(
-            currentPopup.querySelectorAll(".popup__input-error-text")
-        );
-        this._cleanErrorTextList.forEach((cleanErrorItem) => {
-            cleanErrorItem.classList.remove("popup__input-error-text"); //удаляем видимость спана ошибки
-            cleanErrorItem.textContent = ""; //очищаем спан
-        });
-
-        this._cleanErrorInputList = Array.from(
-            currentPopup.querySelectorAll(".popup__input_type_error")
-        );
-        this._cleanErrorInputList.forEach((cleanErrorItem) => {
-            cleanErrorItem.classList.remove("popup__input_type_error"); //удаляем видимость красной линии инпута
-        });
     }
 }

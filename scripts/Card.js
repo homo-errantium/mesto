@@ -1,4 +1,6 @@
-class Card {
+import { openPopup } from "./utils.js";
+
+export class Card {
     constructor(data) {
         this._title = data.name;
         this._image = data.link;
@@ -48,19 +50,21 @@ class Card {
         this._vieweImage.setAttribute("alt", `фото: ${this._textImage}`);
         this._textImage =
             this._clickImageItem.querySelector(".places__subtitle").textContent;
-        imageTitle.textContent = this._textImage;
-        openPopup(popupOpen);
+        this._imageTitle = document.querySelector(".popup__open-image-title");
+        this._imageTitle.textContent = this._textImage;
+        this._popupOpen = document.querySelector(".popup_type_open-image");
+        openPopup(this._popupOpen);
     }
 
     /*-----удаление карточки-----*/
     _handleDeleteButton(event) {
-        const deleteCard = event.target.closest(".places__item");
-        deleteCard.remove();
+        this._deleteCard = event.target.closest(".places__item");
+        this._deleteCard.remove();
     }
 
     /*-----лайк карточки-----*/
     _handleLikeButton(event) {
-        const likeButton = event.target;
-        likeButton.classList.toggle("places__like-logo_active");
+        this._likeButton = event.target;
+        this._likeButton.classList.toggle("places__like-logo_active");
     }
 }
