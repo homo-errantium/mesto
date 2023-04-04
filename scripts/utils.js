@@ -6,11 +6,6 @@ import {
     userInfoProfileEdit,
 } from "./constants.js";
 
-function openPopup(popup) {
-    document.addEventListener("keydown", handleEscapeButton);
-    popup.classList.add("popup_opened");
-}
-
 /*--------ф-я закрытия по клавише------*/
 function handleEscapeButton(event) {
     if (event.key === "Escape") {
@@ -20,14 +15,14 @@ function handleEscapeButton(event) {
 }
 
 /*--------ф-я закрытия при клике на оверлей------*/
-function closePopupOverlay(selectors) {
+function closePopupOverlay() {
     const popupList = Array.from(document.querySelectorAll(".popup"));
     popupList.forEach((popupElement) => {
         popupElement.addEventListener("mousedown", (evt) => {
             if (evt.target.classList.contains("popup_opened")) {
                 closePopup(popupElement);
             }
-            if (evt.target.classList.contains("popup__close")) {
+            if (evt.target.classList.contains(selectors.popupCloseClass)) {
                 closePopup(popupElement);
             }
         });
@@ -38,6 +33,11 @@ function closePopupOverlay(selectors) {
 function closePopup(popup) {
     document.removeEventListener("keydown", handleEscapeButton);
     popup.classList.remove("popup_opened");
+}
+
+function openPopup(popup) {
+    document.addEventListener("keydown", handleEscapeButton);
+    popup.classList.add("popup_opened");
 }
 
 function disableSubmitButton(buttonElement) {

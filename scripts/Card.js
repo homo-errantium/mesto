@@ -1,16 +1,15 @@
 import { openPopup } from "./utils.js";
 
 export class Card {
-    constructor(data) {
+    constructor(data, cardTemplate) {
         this._title = data.name;
         this._image = data.link;
+        this._cardTemplate = cardTemplate;
     }
 
     /*-----взятие разметки из html-----*/
     _getTemplate() {
-        const cardElement = document
-            .querySelector("#placesCardTemplate")
-            .content.cloneNode(true);
+        const cardElement = this._cardTemplate.content.cloneNode(true);
         return cardElement;
     }
 

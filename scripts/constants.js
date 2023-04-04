@@ -54,7 +54,7 @@ const userNameProfileEdit = profile.querySelector(".profile__title");
 const userInfoProfileEdit = profile.querySelector(".profile__subtitle");
 const vieweImage = popupOpen.querySelector(".popup__viewe-image");
 const imageTitle = popupOpen.querySelector(".popup__open-image-title");
-
+const cardTemplate = document.getElementById("placesCardTemplate");
 export {
     initialCards,
     selectors,
@@ -76,4 +76,5 @@ export {
     userInfoProfileEdit,
     vieweImage,
     imageTitle,
+    cardTemplate,
 };
