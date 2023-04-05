@@ -1,8 +1,7 @@
 import { disableSubmitButton, enableSubmitButton } from "./utils.js";
-import { selectors } from "./constants.js";
 
 export class FormValidator {
-    constructor(formElement) {
+    constructor(selectors, formElement) {
         this._form = formElement;
         this._inputSelector = selectors.inputSelector;
         this._submitButtonSelector = selectors.submitButtonSelector;
@@ -52,9 +51,9 @@ export class FormValidator {
     /*--------доступность кнопки-----------*/
     _toggleButtonState() {
         if (this._hasInvalidInput()) {
-            this._disableSubmitButton();
+            disableSubmitButton(this._buttonElement);
         } else {
-            this._enableSubmitButton();
+            enableSubmitButton(this._buttonElement);
         }
     }
 
@@ -83,15 +82,5 @@ export class FormValidator {
         inputElement.classList.remove(this._inputErrorClass); // удаляем класс ошибки (красную подсветку)
         this._errorElement.classList.remove(this._errorTextClass); //удаляем видимость спана ошибки
         this._errorElement.textContent = ""; //очищаем спан
-    }
-
-    _disableSubmitButton() {
-        this._buttonElement.classList.add(this._inactiveButtonClass);
-        this._buttonElement.setAttribute("disabled", "disabled");
-    }
-
-    _enableSubmitButton() {
-        this._buttonElement.classList.remove(this._inactiveButtonClass);
-        this._buttonElement.removeAttribute("disabled", "disabled");
     }
 }

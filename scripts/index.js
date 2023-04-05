@@ -82,7 +82,7 @@ formPopupEdit.addEventListener("submit", handleFormSubmitEdit);
 formPopupAdd.addEventListener("submit", handleFormSubmitAdd);
 
 /*--------вызов навешивания валидации-----------*/
-const formPopupEditValidator = new FormValidator(formPopupEdit);
+const formPopupEditValidator = new FormValidator(selectors, formPopupEdit);
 formPopupEditValidator.enableValidation();
-const formPopupAddValidator = new FormValidator(formPopupAdd);
+const formPopupAddValidator = new FormValidator(selectors, formPopupAdd);
 formPopupAddValidator.enableValidation();
