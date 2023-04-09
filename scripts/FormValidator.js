@@ -64,6 +64,13 @@ export class FormValidator {
         });
     }
 
+    resetValidation() {
+        this._inputList.forEach((input) => {
+            this._hideInputError(input);
+        });
+        this._toggleButtonState();
+    }
+
     /*--------показ ошибок валидации-----------*/
     _showInputError(inputElement) {
         this._errorElement = this._form.querySelector(
@@ -79,6 +86,7 @@ export class FormValidator {
         this._errorElement = this._form.querySelector(
             `.${inputElement.id}-error`
         ); //находим нужный спан
+
         inputElement.classList.remove(this._inputErrorClass); // удаляем класс ошибки (красную подсветку)
         this._errorElement.classList.remove(this._errorTextClass); //удаляем видимость спана ошибки
         this._errorElement.textContent = ""; //очищаем спан

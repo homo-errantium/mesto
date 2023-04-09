@@ -34,6 +34,7 @@ const selectors = {
     inputErrorClass: "popup__input_type_error",
     errorTextClass: "popup__input-error-text",
     popupCloseClass: ".popup__close",
+    cardTemplateId: "placesCardTemplate",
 };
 
 const popupEdit = document.querySelector(".popup_type_edit");
@@ -54,7 +55,10 @@ const userNameProfileEdit = profile.querySelector(".profile__title");
 const userInfoProfileEdit = profile.querySelector(".profile__subtitle");
 const vieweImage = popupOpen.querySelector(".popup__viewe-image");
 const imageTitle = popupOpen.querySelector(".popup__open-image-title");
-const cardTemplate = document.getElementById("placesCardTemplate");
+const submitButtonEdit = popupEdit.querySelector(
+    selectors.submitButtonSelector
+);
+
 export {
     initialCards,
     selectors,
@@ -76,5 +80,5 @@ export {
     userInfoProfileEdit,
     vieweImage,
     imageTitle,
-    cardTemplate,
+    submitButtonEdit,
 };

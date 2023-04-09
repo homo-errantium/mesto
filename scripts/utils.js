@@ -69,22 +69,18 @@ function handleClosePopup() {
     });
 }
 
-/*--------ф-я очитски валидации------*/
-function cleanErrorInput(currentPopup) {
-    const cleanErrorTextList = Array.from(
-        currentPopup.querySelectorAll(".popup__input-error-text")
-    );
-    cleanErrorTextList.forEach((cleanErrorItem) => {
-        cleanErrorItem.classList.remove("popup__input-error-text"); //удаляем видимость спана ошибки
-        cleanErrorItem.textContent = ""; //очищаем спан
-    });
+function cardOpen(event) {
+    const currentCardImage = event.target;
+    const clickImageItem = currentCardImage.closest(".places__item");
 
-    const cleanErrorInputList = Array.from(
-        currentPopup.querySelectorAll(".popup__input_type_error")
-    );
-    cleanErrorInputList.forEach((cleanErrorItem) => {
-        cleanErrorItem.classList.remove("popup__input_type_error"); //удаляем видимость красной линии инпута
-    });
+    const image = document.querySelector(".popup__viewe-image");
+    image.setAttribute("src", currentCardImage.src);
+
+    const textImage =
+        clickImageItem.querySelector(".places__subtitle").textContent;
+    image.setAttribute("alt", `фото: ${textImage}`);
+    const title = document.querySelector(".popup__open-image-title");
+    title.textContent = textImage;
 }
 
 export {
@@ -95,5 +91,5 @@ export {
     enableSubmitButton,
     fillPopupProfileImage,
     handleClosePopup,
-    cleanErrorInput,
+    cardOpen,
 };

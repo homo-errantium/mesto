@@ -15,7 +15,7 @@ import {
     linkInputAdd,
     userNameProfileEdit,
     userInfoProfileEdit,
-    cardTemplate,
+    submitButtonEdit,
 } from "./constants.js";
 import { FormValidator } from "./FormValidator.js";
 import {
@@ -25,21 +25,25 @@ import {
     disableSubmitButton,
     fillPopupProfileImage,
     handleClosePopup,
-    cleanErrorInput,
 } from "./utils.js";
+
+/*------ф-я создания карточки-----*/
+function creatCard(item) {
+    const cardItem = new Card(item, selectors);
+    const cardElement = cardItem.generateCard();
+    return cardElement;
+}
 
 /*-----ф-я добавления карточек в блок-------*/
 function addCard(item) {
-    const card = new Card(item, cardTemplate);
-    const cardElement = card.generateCard();
-    places.prepend(cardElement);
+    const newCard = creatCard(item);
+    places.prepend(newCard);
 }
 
 /*-----дефолтное создание каточек из массива-------*/
 initialCards.forEach(addCard);
 
 /*--------ф-я закрытия при клике на оверлей------*/
-
 closePopupOverlay();
 
 handleClosePopup();
@@ -50,10 +54,7 @@ addButton.addEventListener("click", () => {
 });
 
 redactButton.addEventListener("click", () => {
-    cleanErrorInput(popupEdit);
-    const submitButtonEdit = popupEdit.querySelector(
-        selectors.submitButtonSelector
-    );
+    formPopupEditValidator.resetValidation();
     disableSubmitButton(submitButtonEdit); // чтобы при открытии кнопка была неактивной
     fillPopupProfileImage(); // для попапа редак-я (сохр прежних данных)
     openPopup(popupEdit);
