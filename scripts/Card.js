@@ -1,6 +1,6 @@
 import { openPopup } from "./utils.js";
-import { cardOpen } from "./utils.js";
-import { popupOpen } from "./constants.js";
+import { openImageClick } from "./utils.js";
+import { popupOpenVieweImage } from "./constants.js";
 
 export class Card {
     constructor(data, selectors) {
@@ -45,19 +45,13 @@ export class Card {
         });
 
         this._newCardImage = this._newCard.querySelector(".places__image");
-        this._newCardImage.addEventListener("click", this._handleCardOpen);
+        this._newCardImage.addEventListener("click", this._handleImageClick);
     }
 
     /*-----открытие режима просмотра-----*/
-    _handleCardOpen(event) {
-        cardOpen(event);
-        this._popupOpen = popupOpen;
-        openPopup(this._popupOpen);
-    }
-
-    /*-----удаление карточки-----*/
-    _handleDeleteButton(event) {
-        this._deleteCard = event.target.closest(".places__item");
-        this._deleteCard.remove();
+    _handleImageClick(event) {
+        openImageClick(event);
+        this._popupOpenVieweImage = popupOpenVieweImage;
+        openPopup(this._popupOpenVieweImage);
     }
 }

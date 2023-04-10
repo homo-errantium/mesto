@@ -6,6 +6,9 @@ import {
     userInfoProfileEdit,
 } from "./constants.js";
 
+const image = document.querySelector(".popup__viewe-image");
+const title = document.querySelector(".popup__open-image-title");
+
 /*--------ф-я закрытия по клавише------*/
 function handleEscapeButton(event) {
     if (event.key === "Escape") {
@@ -69,17 +72,13 @@ function handleClosePopup() {
     });
 }
 
-function cardOpen(event) {
+function openImageClick(event) {
     const currentCardImage = event.target;
     const clickImageItem = currentCardImage.closest(".places__item");
-
-    const image = document.querySelector(".popup__viewe-image");
     image.setAttribute("src", currentCardImage.src);
-
     const textImage =
         clickImageItem.querySelector(".places__subtitle").textContent;
     image.setAttribute("alt", `фото: ${textImage}`);
-    const title = document.querySelector(".popup__open-image-title");
     title.textContent = textImage;
 }
 
@@ -91,5 +90,5 @@ export {
     enableSubmitButton,
     fillPopupProfileImage,
     handleClosePopup,
-    cardOpen,
+    openImageClick,
 };

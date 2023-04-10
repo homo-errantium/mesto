@@ -39,7 +39,7 @@ const selectors = {
 
 const popupEdit = document.querySelector(".popup_type_edit");
 const popupAdd = document.querySelector(".popup_type_add");
-const popupOpen = document.querySelector(".popup_type_open-image");
+const popupOpenVieweImage = document.querySelector(".popup_type_open-image");
 const places = document.querySelector(".places");
 const profile = document.querySelector(".profile");
 const redactButton = profile.querySelector(".profile__redact-button");
@@ -53,8 +53,10 @@ const jobInputEdit = popupEdit.querySelector(".popup__input_type_userinfo");
 const linkInputAdd = popupAdd.querySelector(".popup__input_type_placelink");
 const userNameProfileEdit = profile.querySelector(".profile__title");
 const userInfoProfileEdit = profile.querySelector(".profile__subtitle");
-const vieweImage = popupOpen.querySelector(".popup__viewe-image");
-const imageTitle = popupOpen.querySelector(".popup__open-image-title");
+const vieweImage = popupOpenVieweImage.querySelector(".popup__viewe-image");
+const imageTitle = popupOpenVieweImage.querySelector(
+    ".popup__open-image-title"
+);
 const submitButtonEdit = popupEdit.querySelector(
     selectors.submitButtonSelector
 );
@@ -64,7 +66,7 @@ export {
     selectors,
     popupEdit,
     popupAdd,
-    popupOpen,
+    popupOpenVieweImage,
     places,
     profile,
     redactButton,
