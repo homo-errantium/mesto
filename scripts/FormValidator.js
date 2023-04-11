@@ -1,5 +1,3 @@
-import { disableSubmitButton, enableSubmitButton } from "./utils.js";
-
 export class FormValidator {
     constructor(selectors, formElement) {
         this._form = formElement;
@@ -16,6 +14,16 @@ export class FormValidator {
         );
     }
 
+    disableSubmitButton(buttonElement) {
+        buttonElement.classList.add(this._inactiveButtonClass);
+        buttonElement.setAttribute("disabled", "disabled");
+    }
+
+    enableSubmitButton(buttonElement) {
+        buttonElement.classList.remove(this._inactiveButtonClass);
+        buttonElement.removeAttribute("disabled", "disabled");
+    }
+
     /*---навешивание обработчиков на формы---*/
     enableValidation() {
         this._form.addEventListener("submit", (evt) => {
@@ -26,7 +34,7 @@ export class FormValidator {
 
     /*--------навешивание валидации на поля-----------*/
     _setEventListeners() {
-        disableSubmitButton(this._buttonElement);
+        this.disableSubmitButton(this._buttonElement);
         this._inputList.forEach((inputElement) => {
             inputElement.addEventListener("input", () => {
                 this._checkInputValidity(inputElement);
@@ -51,9 +59,9 @@ export class FormValidator {
     /*--------доступность кнопки-----------*/
     _toggleButtonState() {
         if (this._hasInvalidInput()) {
-            disableSubmitButton(this._buttonElement);
+            this.disableSubmitButton(this._buttonElement);
         } else {
-            enableSubmitButton(this._buttonElement);
+            this.enableSubmitButton(this._buttonElement);
         }
     }
 

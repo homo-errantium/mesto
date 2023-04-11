@@ -22,7 +22,6 @@ import {
     openPopup,
     closePopup,
     closePopupOverlay,
-    disableSubmitButton,
     fillPopupProfileImage,
     handleClosePopup,
 } from "./utils.js";
@@ -55,7 +54,9 @@ addButton.addEventListener("click", () => {
 
 redactButton.addEventListener("click", () => {
     formPopupEditValidator.resetValidation();
-    disableSubmitButton(submitButtonEdit); // чтобы при открытии кнопка была неактивной
+
+    formPopupEditValidator.disableSubmitButton(submitButtonEdit); //  ПОВТОРНОЕ отключение кнопки попапа редактирования по-другому не реализовать  //
+
     fillPopupProfileImage(); // для попапа редак-я (сохр прежних данных)
     openPopup(popupEdit);
 });

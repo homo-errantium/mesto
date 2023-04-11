@@ -43,16 +43,6 @@ function openPopup(popup) {
     popup.classList.add("popup_opened");
 }
 
-function disableSubmitButton(buttonElement) {
-    buttonElement.classList.add(selectors.inactiveButtonClass);
-    buttonElement.setAttribute("disabled", "disabled");
-}
-
-function enableSubmitButton(buttonElement) {
-    buttonElement.classList.remove(selectors.inactiveButtonClass);
-    buttonElement.removeAttribute("disabled", "disabled");
-}
-
 /*--------ф-я дефолтного заполнения полей профайла------*/
 function fillPopupProfileImage() {
     nameInputEdit.value = userNameProfileEdit.textContent; //добавления в ред.окно прежнего имени
@@ -86,8 +76,6 @@ export {
     openPopup,
     closePopup,
     closePopupOverlay,
-    disableSubmitButton,
-    enableSubmitButton,
     fillPopupProfileImage,
     handleClosePopup,
     openImageClick,

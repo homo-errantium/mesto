@@ -21,8 +21,8 @@ export class Card {
     /*-----создание карточки-----*/
     generateCard() {
         this._newCard = this._getTemplate();
-        this._setEventListeners();
         this._newCardImage = this._newCard.querySelector(".places__image");
+        this._setEventListeners();
         this._newCardImage.setAttribute("src", this._image);
         this._newCardImage.setAttribute("alt", `фото: ${this._title}`);
         this._newCard.querySelector(".places__subtitle").textContent =
@@ -43,8 +43,7 @@ export class Card {
         this._deleteButton.addEventListener("click", () => {
             this._newCard.remove();
         });
-
-        this._newCardImage = this._newCard.querySelector(".places__image");
+        ё;
         this._newCardImage.addEventListener("click", this._handleImageClick);
     }
 
