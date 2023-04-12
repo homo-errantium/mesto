@@ -43,7 +43,7 @@ export class Card {
         this._deleteButton.addEventListener("click", () => {
             this._newCard.remove();
         });
-        ё;
+
         this._newCardImage.addEventListener("click", this._handleImageClick);
     }
 
