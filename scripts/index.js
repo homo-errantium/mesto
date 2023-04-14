@@ -15,7 +15,6 @@ import {
     linkInputAdd,
     userNameProfileEdit,
     userInfoProfileEdit,
-    submitButtonEdit,
 } from "./constants.js";
 import { FormValidator } from "./FormValidator.js";
 import {
@@ -55,7 +54,7 @@ addButton.addEventListener("click", () => {
 redactButton.addEventListener("click", () => {
     formPopupEditValidator.resetValidation();
 
-    formPopupEditValidator.disableSubmitButton(submitButtonEdit); //  ПОВТОРНОЕ отключение кнопки попапа редактирования по-другому не реализовать  //
+    formPopupEditValidator.disableSubmitButton(); //  ПОВТОРНОЕ отключение кнопки попапа редактирования по-другому не реализовать  //
 
     fillPopupProfileImage(); // для попапа редак-я (сохр прежних данных)
     openPopup(popupEdit);
@@ -76,7 +75,7 @@ function handleFormSubmitAdd(evt) {
     closePopup(popupAdd);
     evt.target.reset();
     const buttonAdd = evt.submitter;
-    disableSubmitButton(buttonAdd);
+    formPopupAddValidator.disableSubmitButton();
 }
 
 /*-----обр-к создания/редактирования карточки----*/
