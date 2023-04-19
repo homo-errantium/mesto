@@ -1,3 +1,5 @@
+import Section from "./Section.js";
+// import SubmitForm from "./FormSubmit.js";
 import { Card } from "./Card.js";
 import {
     initialCards,
@@ -26,20 +28,40 @@ import {
 } from "./utils.js";
 
 /*------ф-я создания карточки-----*/
-function creatCard(item) {
+function createCard(item) {
     const cardItem = new Card(item, selectors);
     const cardElement = cardItem.generateCard();
     return cardElement;
 }
 
-/*-----ф-я добавления карточек в блок-------*/
-function addCard(item) {
-    const newCard = creatCard(item);
-    places.prepend(newCard);
-}
+// /*-----ф-я добавления карточек в блок-------*/
+// function addCard(item) {
+//     const newCard = creatCard(item);
+//     places.prepend(newCard);
+// }
 
-/*-----дефолтное создание каточек из массива-------*/
-initialCards.forEach(addCard);
+// /*-----дефолтное создание каточек из массива-------*/
+// initialCards.forEach(addCard);
+
+const сardList = new Section(
+    {
+        items: initialCards,
+        renderer: (item) => {
+            const card = createCard(item);
+            сardList.addItem(card);
+        },
+    },
+    ".places"
+);
+
+сardList.renderItems();
+
+// const form = new SubmitForm({ selector: ".popup" });
+// const formElement = form.generate();
+// const formRenderer = new Section(
+//     {data: [],},".form-section"
+// );
+// formRenderer.setItem(formElement);
 
 /*--------ф-я закрытия при клике на оверлей------*/
 closePopupOverlay();

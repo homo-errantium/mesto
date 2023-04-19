@@ -10,38 +10,38 @@ const image = document.querySelector(".popup__viewe-image");
 const title = document.querySelector(".popup__open-image-title");
 
 /*--------ф-я закрытия по клавише------*/
-function handleEscapeButton(event) {
-    if (event.key === "Escape") {
-        const currentPopupItem = document.querySelector(".popup_opened");
-        closePopup(currentPopupItem);
-    }
-}
+// function handleEscapeButton(event) {
+//     if (event.key === "Escape") {
+//         const currentPopupItem = document.querySelector(".popup_opened");
+//         closePopup(currentPopupItem);
+//     }
+// }
 
 /*--------ф-я закрытия при клике на оверлей------*/
-function closePopupOverlay() {
-    const popupList = Array.from(document.querySelectorAll(".popup"));
-    popupList.forEach((popupElement) => {
-        popupElement.addEventListener("mousedown", (evt) => {
-            if (evt.target.classList.contains("popup_opened")) {
-                closePopup(popupElement);
-            }
-            if (evt.target.classList.contains(selectors.popupCloseClass)) {
-                closePopup(popupElement);
-            }
-        });
-    });
-}
+// function closePopupOverlay() {
+//     const popupList = Array.from(document.querySelectorAll(".popup"));
+//     popupList.forEach((popupElement) => {
+//         popupElement.addEventListener("mousedown", (evt) => {
+//             if (evt.target.classList.contains("popup_opened")) {
+//                 closePopup(popupElement);
+//             }
+//             if (evt.target.classList.contains(selectors.popupCloseClass)) {
+//                 closePopup(popupElement);
+//             }
+//         });
+//     });
+// }
 
 /*--------ф-я открытия/закрытия попап-а------*/
-function closePopup(popup) {
-    document.removeEventListener("keydown", handleEscapeButton);
-    popup.classList.remove("popup_opened");
-}
+// function closePopup(popup) {
+//     document.removeEventListener("keydown", handleEscapeButton);
+//     popup.classList.remove("popup_opened");
+// }
 
-function openPopup(popup) {
-    document.addEventListener("keydown", handleEscapeButton);
-    popup.classList.add("popup_opened");
-}
+// function openPopup(popup) {
+//     document.addEventListener("keydown", handleEscapeButton);
+//     popup.classList.add("popup_opened");
+// }
 
 /*--------ф-я дефолтного заполнения полей профайла------*/
 function fillPopupProfileImage() {
@@ -50,17 +50,17 @@ function fillPopupProfileImage() {
 }
 
 /*-----обраб-к закрытия попапа------*/
-function handleClosePopup() {
-    const popupCloseButtonList = Array.from(
-        document.querySelectorAll(".popup__close")
-    );
-    popupCloseButtonList.forEach((popupCloseButton) => {
-        popupCloseButton.addEventListener("click", function (evt) {
-            const popupCloseItem = popupCloseButton.closest(".popup");
-            closePopup(popupCloseItem); //ф-я самого закрытия
-        });
-    });
-}
+// function handleClosePopup() {
+//     const popupCloseButtonList = Array.from(
+//         document.querySelectorAll(".popup__close")
+//     );
+//     popupCloseButtonList.forEach((popupCloseButton) => {
+//         popupCloseButton.addEventListener("click", function (evt) {
+//             const popupCloseItem = popupCloseButton.closest(".popup");
+//             closePopup(popupCloseItem); //ф-я самого закрытия
+//         });
+//     });
+// }
 
 function openImageClick(event) {
     const currentCardImage = event.target;
