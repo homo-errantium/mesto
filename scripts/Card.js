@@ -1,12 +1,9 @@
-import { openPopup } from "./utils.js";
-import { openImageClick } from "./utils.js";
-import { popupOpenVieweImage } from "./constants.js";
-
-export class Card {
-    constructor(data, selectors) {
+export default class Card {
+    constructor(data, selectors, handleCardClick) {
         this._title = data.name;
         this._image = data.link;
         this._cardTemplate = selectors.cardTemplateId;
+        this._handleCardClick = handleCardClick;
     }
 
     /*-----взятие разметки из html-----*/
@@ -44,13 +41,6 @@ export class Card {
             this._newCard.remove();
         });
 
-        this._newCardImage.addEventListener("click", this._handleImageClick);
-    }
-
-    /*-----открытие режима просмотра-----*/
-    _handleImageClick(event) {
-        openImageClick(event);
-        this._popupOpenVieweImage = popupOpenVieweImage;
-        openPopup(this._popupOpenVieweImage);
+        this._newCardImage.addEventListener("click", this._handleCardClick);
     }
 }

@@ -1,11 +1,14 @@
 import Section from "./Section.js";
-// import SubmitForm from "./FormSubmit.js";
-import { Card } from "./Card.js";
+import Card from "./Card.js";
+import PopupWithForm from "./PopupWithForm.js";
+import PopupWithImage from "./PopupWithImage.js";
+import UserInfo from "./UserInfo.js";
 import {
     initialCards,
     selectors,
     popupEdit,
     popupAdd,
+    popupOpenVieweImage,
     places,
     redactButton,
     addButton,
@@ -19,67 +22,81 @@ import {
     userInfoProfileEdit,
 } from "./constants.js";
 import { FormValidator } from "./FormValidator.js";
-import {
-    openPopup,
-    closePopup,
-    closePopupOverlay,
-    fillPopupProfileImage,
-    handleClosePopup,
-} from "./utils.js";
+
+/*создание экземпляра класса слоя-вставки*/
+const сardList = new Section(
+    {
+        data: initialCards,
+        renderer: (data) => {
+            const card = createCard(data);
+            сardList.addItem(card);
+        },
+    },
+    places
+);
+
+/*прорисовка и вставка дефолтных карточек*/
+сardList.renderItems();
 
 /*------ф-я создания карточки-----*/
-function createCard(item) {
-    const cardItem = new Card(item, selectors);
+function createCard(data) {
+    const cardItem = new Card(data, selectors, openCard); //изменить selectors
     const cardElement = cardItem.generateCard();
     return cardElement;
 }
 
-// /*-----ф-я добавления карточек в блок-------*/
-// function addCard(item) {
-//     const newCard = creatCard(item);
-//     places.prepend(newCard);
-// }
-
-// /*-----дефолтное создание каточек из массива-------*/
-// initialCards.forEach(addCard);
-
-const сardList = new Section(
-    {
-        items: initialCards,
-        renderer: (item) => {
-            const card = createCard(item);
-            сardList.addItem(card);
-        },
+/*создание экземпляра формы добавления карточек*/
+const popupAddCard = new PopupWithForm({
+    popupSelector: popupAdd,
+    handleFormSubmit: (data) => {
+        const newCard = createCard(data);
+        сardList.addItem(newCard);
     },
-    ".places"
-);
+});
 
-сardList.renderItems();
+/*навешывание прослушек на форму добавления карточки*/
+popupAddCard.setEventListeners();
 
-// const form = new SubmitForm({ selector: ".popup" });
-// const formElement = form.generate();
-// const formRenderer = new Section(
-//     {data: [],},".form-section"
-// );
-// formRenderer.setItem(formElement);
+/*создание экземпляра формы открытия карточек*/
+const imagePopup = new PopupWithImage(popupOpenVieweImage);
 
-/*--------ф-я закрытия при клике на оверлей------*/
-closePopupOverlay();
+/*навешывание прослушки на форму открытия карточки*/
+imagePopup.setEventListeners();
 
-handleClosePopup();
+/*------ф-я открытия карточки-----*/
+function openCard(data) {
+    imagePopup.open(data);
+}
 
-/*------кнопки------*/
+/*------навешывание прослушки на кнопку добавления------*/
 addButton.addEventListener("click", () => {
-    openPopup(popupAdd);
+    popupAddCard.openPopup();
+    // addFormValidation.hideAllErrors();
+});
+
+/*создание экземпляра формы редактрования профиля*/
+const popupEditProfile = new PopupWithForm({
+    popupSelector: popupEdit,
+    handleFormSubmit: (info) => {
+        userInfo.setUserInfo({ info });
+    },
+});
+
+/*навешывание прослушки на форму добавления карточки*/
+popupEditProfile.setEventListeners();
+
+/*создание экземпляра формы сбора информации*/
+const userInfo = new UserInfo({
+    nameSelector: ".profile__title",
+    jobSelector: ".profile__subtitle",
 });
 
 redactButton.addEventListener("click", () => {
+    const info = userInfo.getUserInfo();
+    popupEditProfile.setInputValue(info);
+    popupEditProfile.openPopup();
     formPopupEditValidator.resetValidation();
-
     formPopupEditValidator.disableSubmitButton(); //  ПОВТОРНОЕ отключение кнопки попапа редактирования по-другому не реализовать  //
-
-    fillPopupProfileImage(); // для попапа редак-я (сохр прежних данных)
-    openPopup(popupEdit);
 });
 
 /*--------применение обновленных данных-----------*/

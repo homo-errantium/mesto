@@ -1,5 +1,5 @@
 import {
-    selectors,
+    // selectors,
     nameInputEdit,
     jobInputEdit,
     userNameProfileEdit,
@@ -44,10 +44,10 @@ const title = document.querySelector(".popup__open-image-title");
 // }
 
 /*--------ф-я дефолтного заполнения полей профайла------*/
-function fillPopupProfileImage() {
-    nameInputEdit.value = userNameProfileEdit.textContent; //добавления в ред.окно прежнего имени
-    jobInputEdit.value = userInfoProfileEdit.textContent; //добавления в ред.окно прежнего статуса
-}
+// function fillPopupProfileImage() {
+//     nameInputEdit.value = userNameProfileEdit.textContent; //добавления в ред.окно прежнего имени
+//     jobInputEdit.value = userInfoProfileEdit.textContent; //добавления в ред.окно прежнего статуса
+// }
 
 /*-----обраб-к закрытия попапа------*/
 // function handleClosePopup() {
@@ -73,10 +73,10 @@ function openImageClick(event) {
 }
 
 export {
-    openPopup,
-    closePopup,
-    closePopupOverlay,
-    fillPopupProfileImage,
-    handleClosePopup,
+    // openPopup,
+    // closePopup,
+    // closePopupOverlay,
+    // fillPopupProfileImage,
+    // handleClosePopup,
     openImageClick,
 };
