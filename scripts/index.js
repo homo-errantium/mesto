@@ -40,7 +40,7 @@ const сardList = new Section(
 
 /*------ф-я создания карточки-----*/
 function createCard(data) {
-    const cardItem = new Card(data, selectors, handleCardClick); //изменить selectors
+    const cardItem = new Card({ data, selectors }, handleCardClick); //изменить selectors
     const cardElement = cardItem.generateCard();
     return cardElement;
 }
@@ -51,6 +51,7 @@ const popupAddCard = new PopupWithForm({
     handleFormSubmit: (data) => {
         const newCard = createCard(data);
         сardList.addItem(newCard);
+        popupAddCard.closePopup();
     },
 });
 
