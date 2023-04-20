@@ -29,6 +29,10 @@ export default class Card {
 
     /*-----навешивание  слушателей-----*/
     _setEventListeners() {
+        this._newCardImage.addEventListener("click", () => {
+            this._handleCardClick(this._title, this._image);
+        });
+
         this._likeButton = this._newCard.querySelector(".places__like-logo");
         this._likeButton.addEventListener("click", () => {
             this._likeButton.classList.toggle("places__like-logo_active");
@@ -41,6 +45,6 @@ export default class Card {
             this._newCard.remove();
         });
 
-        this._newCardImage.addEventListener("click", this._handleCardClick);
+        // this._newCardImage.addEventListener("click", this._handleCardClick);
     }
 }

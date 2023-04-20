@@ -48,11 +48,11 @@ const formCollection = document.forms;
 const formPopupEdit = formCollection.popupEditForm;
 const formPopupAdd = formCollection.popupAddForm;
 const nameInputEdit = document.querySelector(".popup__input_type_username");
-const nameInputAdd = ".popup__input_type_placename";
+const nameInputAdd = document.querySelector(".popup__input_type_placename");
 const jobInputEdit = document.querySelector(".popup__input_type_userinfo");
 const linkInputAdd = ".popup__input_type_placelink";
-const userNameProfileEdit = ".profile__title";
-const userInfoProfileEdit = ".profile__subtitle";
+const userNameProfileEdit = ".profile__title"; //то, что есть
+const userInfoProfileEdit = ".profile__subtitle"; //то, что есть
 // const vieweImage = popupOpenVieweImage.querySelector(".popup__viewe-image");
 // const imageTitle = popupOpenVieweImage.querySelector(
 //     ".popup__open-image-title"

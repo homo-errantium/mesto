@@ -39,12 +39,12 @@
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form novalidate enctype="text/plain" class="popup__form" id="popupEditForm">
                     <fieldset class="popup__set">
-                        <input id="username-input" required placeholder="Имя" type="text"
+                        <input name="name" id="username-input" required placeholder="Имя" type="text"
                             class="popup__input popup__input_type_username" minlength="2" maxlength="40" />
                         <div class="popup__input-error">
                             <span class="popup__input-error-text username-input-error"></span>
                         </div>
-                        <input id="userinfo-input" required placeholder="О себе" type="text"
+                        <input name="about" id="userinfo-input" required placeholder="О себе" type="text"
                             class="popup__input popup__input_type_userinfo" minlength="2" maxlength="200" />
                         <div class="popup__input-error">
                             <span class="popup__input-error-text userinfo-input-error"></span>
@@ -64,12 +64,12 @@
                 <h2 class="popup__title">Новое место</h2>
                 <form novalidate enctype="text/plain" class="popup__form" id="popupAddForm">
                     <fieldset class="popup__set">
-                        <input id="placename-input" required placeholder="Название" type="text"
+                        <input name="name" id="placename-input" required placeholder="Название" type="text"
                             class="popup__input popup__input_type_placename" minlength="2" maxlength="30" />
                         <div class="popup__input-error">
                             <span class="popup__input-error-text placename-input-error"></span>
                         </div>
-                        <input id="placelink-input" required placeholder="Ссылка на картинку" type="url"
+                        <input name="about" id="placelink-input" required placeholder="Ссылка на картинку" type="url"
                             class="popup__input popup__input_type_placelink" />
                         <div class="popup__input-error">
                             <span class="popup__input-error-text placelink-input-error"></span>
