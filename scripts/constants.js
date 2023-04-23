@@ -26,21 +26,29 @@ const initialCards = [
 ];
 
 const selectors = {
+    cardTemplateId: "placesCardTemplate",
     containerSelector: ".popup__container",
     formSelector: ".popup__form",
-    inputSelector: ".popup__input",
-    submitButtonSelector: ".popup__save-button",
-    inactiveButtonClass: "popup__save-button_inactive",
-    inputErrorClass: "popup__input_type_error",
     errorTextClass: "popup__input-error-text",
+    inactiveButtonClass: "popup__save-button_inactive",
+    inputSelector: ".popup__input",
+    inputErrorClass: "popup__input_type_error",
     popupCloseClass: ".popup__close",
-    cardTemplateId: "placesCardTemplate",
+    placesSelector: ".places",
+    placesItemSelector: ".places__item",
+    placesImageSelector: ".places__image",
+    placesSubtitleSelector: ".places__subtitle",
+    placesLikeLogoSelector: ".places__like-logo",
+    placesLikeLogoActiveClass: "places__like-logo_active",
+    placesDeleteButtonSelector: ".places__delete-button",
+    popupEditClass: ".popup_type_edit",
+    popupAddClass: ".popup_type_add",
+    popupVieweImageSelector: ".popup__viewe-image",
+    popupOpenImageTitleSelector: ".popup__open-image-title",
+    submitButtonSelector: ".popup__save-button",
 };
 
-const popupEdit = ".popup_type_edit";
-const popupAdd = ".popup_type_add";
 const popupOpenVieweImage = ".popup_type_open-image";
-const places = ".places";
 const profile = document.querySelector(".profile");
 const redactButton = profile.querySelector(".profile__redact-button");
 const addButton = profile.querySelector(".profile__add-button");
@@ -50,24 +58,13 @@ const formPopupAdd = formCollection.popupAddForm;
 const nameInputEdit = document.querySelector(".popup__input_type_username");
 const nameInputAdd = document.querySelector(".popup__input_type_placename");
 const jobInputEdit = document.querySelector(".popup__input_type_userinfo");
-const linkInputAdd = ".popup__input_type_placelink";
-const userNameProfileEdit = ".profile__title"; //то, что есть
-const userInfoProfileEdit = ".profile__subtitle"; //то, что есть
-// const vieweImage = popupOpenVieweImage.querySelector(".popup__viewe-image");
-// const imageTitle = popupOpenVieweImage.querySelector(
-//     ".popup__open-image-title"
-// );
-// const submitButtonEdit = popupEdit.querySelector(
-//     selectors.submitButtonSelector
-// );
+const userNameProfileEdit = document.querySelector(".profile__title"); //то, что есть
+const userInfoProfileEdit = document.querySelector(".profile__subtitle"); //то, что есть
 
 export {
     initialCards,
     selectors,
-    popupEdit,
-    popupAdd,
     popupOpenVieweImage,
-    places,
     profile,
     redactButton,
     addButton,
@@ -77,10 +74,6 @@ export {
     nameInputEdit,
     nameInputAdd,
     jobInputEdit,
-    linkInputAdd,
     userNameProfileEdit,
     userInfoProfileEdit,
-    // vieweImage,
-    // imageTitle,
-    // submitButtonEdit,
 };
