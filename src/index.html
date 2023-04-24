@@ -5,18 +5,17 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./pages/index.css" />
     <title>Mesto</title>
 </head>
 
 <body class="root">
     <div class="page">
         <header class="header">
-            <img class="header__logo" src="./images/logo_mesto.svg" alt="логотип Место.Россия" />
+            <img src="<%=require('./images/logo_mesto.svg')%>" class=" header__logo" alt="логотип Место.Россия" />
         </header>
         <main class="main">
             <section class="profile">
-                <img class="profile__image" src="./images/avatar_custo.jpg" alt="аватар Жак-Ив Кусто" />
+                <img class="profile__image" src="<%=require('./images/avatar_custo.jpg')%>" alt="аватар Жак-Ив Кусто" />
                 <div class="profile__info">
                     <div class="profile__titles-string">
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -100,11 +99,7 @@
             </div>
         </div>
     </template>
-    <!-- <script defer src="./scripts/Card.js"></script>
-    <script defer src="./scripts/FormValidator.js"></script>
-    <script defer src="./scripts/constants.js"></script>
-    <script defer src="./scripts/validate.js"></script> -->
-    <script src="./scripts/index.js" type="module"></script>
+    <script src="./scripts/pages/index.js" type="module"></script>
 </body>
 
 </html>
