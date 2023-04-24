@@ -1,10 +1,10 @@
-import "./pages/index.css";
-import Section from "./scripts/components/Section.js";
-import Card from "./scripts/components/Card.js";
-import PopupWithForm from "./scripts/components/PopupWithForm.js";
-import PopupWithImage from "./scripts/components/PopupWithImage.js";
-import UserInfo from "./scripts/components/UserInfo.js";
-import FormValidator from "./scripts/components/FormValidator.js";
+import "./index.css";
+import Section from "../scripts/components/Section.js";
+import Card from "../scripts/components/Card.js";
+import PopupWithForm from "../scripts/components/PopupWithForm.js";
+import PopupWithImage from "../scripts/components/PopupWithImage.js";
+import UserInfo from "../scripts/components/UserInfo.js";
+import FormValidator from "../scripts/components/FormValidator.js";
 import {
     initialCards,
     selectors,
@@ -17,7 +17,7 @@ import {
     jobInputEdit,
     userNameProfileEdit,
     userInfoProfileEdit,
-} from "./scripts/utils/constants.js";
+} from "../scripts/utils/constants.js";
 
 /*-----------------------Блок создания Карточки---------------------*/
 /*создание экземпляра класса слоя-вставки*/
