@@ -89,8 +89,7 @@ const popupEditProfile = new PopupWithForm({
 /*навешивание прослушки на кпопку редактирования*/
 redactButton.addEventListener("click", () => {
     const info = userInfo.getUserInfo();
-    nameInputEdit.value = info.name;
-    jobInputEdit.value = info.about;
+    popupEditProfile.setInputValues(info);
     popupEditProfile.openPopup();
     formPopupEditValidator.resetValidation();
     formPopupEditValidator.disableSubmitButton();

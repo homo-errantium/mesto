@@ -33,22 +33,30 @@ export default class Card {
         return this._newCard;
     }
 
+    _toggleLike() {
+        this._likeButton.classList.toggle(this._placesLikeLogoActive);
+    }
+
+    _deleteCard() {
+        this._newCard.remove();
+    }
+
     /*-----навешивание  слушателей-----*/
     _setEventListeners() {
         this._newCardImage.addEventListener("click", () => {
-            this._handleCardClick(this._title, this._image);
+            this._handleCardClick(this._title, this._image); //ф-я должна быть принята как аргумент (по заданию)
         });
 
         this._likeButton = this._newCard.querySelector(this._placesLikeLogo);
         this._likeButton.addEventListener("click", () => {
-            this._likeButton.classList.toggle(this._placesLikeLogoActive);
+            this._toggleLike();
         });
 
         this._deleteButton = this._newCard.querySelector(
             this._placesDeleteButton
         );
         this._deleteButton.addEventListener("click", () => {
-            this._newCard.remove();
+            this._deleteCard();
         });
     }
 }
