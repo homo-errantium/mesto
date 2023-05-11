@@ -1,19 +1,13 @@
 .footer {
-    padding-bottom: 60px;
-    margin-top: auto;
+  box-sizing: border-box;
+  width: calc((100vw - 320px) / (1280 - 320) * (880 - 320) + 300px);
+  margin: 0 auto calc((100vw - 320px) / (1280 - 320) * (60 - 36) + 36px);
+  padding-left: calc((100vw - 320px) / (1280 - 320) * (0 - 19) + 19px);
 }
 
-@media screen and (max-width: 879px) {
-    .footer {
-        padding: 0 2%;
-    }
-}
-
-@media screen and (max-width: 767px) {
-    .footer {
-        padding: 0;
-        margin-left: 19px;
-        margin-bottom: 36px;
-        max-width: 282px;
-    }
+@media screen and (min-width: 1280px) {
+  .footer {
+    width: 880px;
+    margin: 0 auto 60px;
+  }
 }

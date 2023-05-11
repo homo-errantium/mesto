@@ -1,8 +1,4 @@
 .popup_opened {
-    display: flex;
-    visibility: visible;
-    -webkit-transition: all 0.35s ease-out;
-    -moz-transition: all 0.35s ease-out;
-    transition: all 0.35s ease-out;
-    opacity: 1;
+  visibility: visible;
+  opacity: 1;
 }
