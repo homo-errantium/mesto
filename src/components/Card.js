@@ -2,41 +2,41 @@ export default class Card {
     constructor({
         data,
         userId,
-        cardSelector,
+        cardTemplateSelector,
         handleCardClick,
-        handleLikeButtonClick,
-        handleRemoveButtonClick,
+        handleLikeButton,
+        handleDeleteButton,
     }) {
         this._currentUserId = userId;
-        this._isUserCard = userId === data.owner._id;
+        this._dataOwnerId = data.owner._id;
         this._imageLink = data.link;
         this._imageName = data.name;
         this._name = data.name;
         this._likes = data.likes;
         this._cardId = data._id;
-        this._cardSelector = cardSelector;
+        this._cardTemplateSelector = cardTemplateSelector;
         this._handleCardClick = handleCardClick;
-        this._handleLikeButtonClick = handleLikeButtonClick;
-        this._handleRemoveButtonClick = handleRemoveButtonClick;
+        this._handleLikeButton = handleLikeButton;
+        this._handleDeleteButton = handleDeleteButton;
     }
 
     _getTemplateElement() {
         return document
-            .querySelector(this._cardSelector)
+            .querySelector(this._cardTemplateSelector)
             .content.querySelector(".element")
             .cloneNode(true);
     }
 
     _setEventListeners() {
-        if (this._isUserCard) {
+        if (this._currentUserId === this._dataOwnerId) {
             this._cardElement
                 .querySelector(".element__btn-trash")
                 .addEventListener("click", (evt) => {
-                    this._handleRemoveButtonClick(evt);
+                    this._handleDeleteButton(evt);
                 });
         }
         this._likeButton.addEventListener("click", (evt) =>
-            this._handleLikeButtonClick(evt)
+            this._handleLikeButton(evt)
         );
         this._cardsElementImage.addEventListener("click", () =>
             this._handleCardClick()
@@ -52,7 +52,7 @@ export default class Card {
         );
         this._cardsElementImage =
             this._cardElement.querySelector(".element__image");
-        if (!this._isUserCard) {
+        if (this._currentUserId !== this._dataOwnerId) {
             this._cardElement.querySelector(".element__btn-trash").remove();
         }
 
@@ -89,6 +89,9 @@ export default class Card {
 
     setLikesCounter(data) {
         this._countLikeElement.textContent = data.length;
+        if (this._checkUserLike()) {
+            this.setLike();
+        }
     }
 
     _checkUserLike() {
