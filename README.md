@@ -1,5 +1,3 @@
-# Hi, my name is Aishat.
-
 ## This project is a "Mesto" website.
 
 **Intro**
